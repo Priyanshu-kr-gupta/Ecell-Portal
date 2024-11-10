@@ -16,7 +16,7 @@ const sendOtp = async(req,res)=>{
       auth:
       {
           user:'dlnpriyanshu@gmail.com',
-          pass:''
+          pass:'tohz shpi cnpu prtl'
       }
   }
   )   
