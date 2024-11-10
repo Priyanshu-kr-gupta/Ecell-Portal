@@ -15,7 +15,7 @@ const sendOtp = async(req,res)=>{
       service:'gmail',
       auth:
       {
-          user:'',
+          user:'dlnpriyanshu@gmail.com',
           pass:''
       }
   }
