@@ -4,15 +4,20 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userRole, setUserRole] = useState('');
+  const [userRole, setUserRole] = useState(localStorage.getItem('userRole') || '');
+  const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
   
-  //ye login se sath adjust karna hai filhal hard code kar deta hu
-  const handleRole = (role) => {
+const handleRole = (role) => {
     setUserRole(role); 
+    localStorage.setItem('userRole', role);
+};
+const handleUserId = (id) => {
+  setUserId(id);
+  localStorage.setItem('userId', id);
 };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, userRole, setUserRole,handleRole }}>
+    <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, userRole, setUserRole, handleRole, userId, handleUserId }}>
       {children}
     </AuthContext.Provider>
   );
