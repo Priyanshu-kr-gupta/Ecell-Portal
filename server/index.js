@@ -9,12 +9,14 @@ const connectToMongo=require('./config/dbConnect')
 
 const AuthRouter = require("./router/AuthRouter")
 const UserRouter = require("./router/UserRouter")
+const PublicRouter = require("./router/PublicRouter")
 // const AdminRouter = require("./router/AdminRouter")
 
 
 
 app.use("/api/Auth",AuthRouter)
 app.use("/api/User",UserRouter)
+app.use("/api/Public",PublicRouter)
 // app.use("/api/Admin",AdminRouter)
 
 

@@ -2,17 +2,6 @@
 
 
 
-const getAllEvent =  async (req,res)=>{
-    
-    try{
-
-    }
-    
-    catch(error){
-
-    }
-}
-
 const addEvent = async (req, res) => {
 
     try{
@@ -37,15 +26,6 @@ const removeEvent = async (req, res) => {
 }
 
 
-const getAllGuestSpeakwer =  async (req,res)=>{
-    try{
-
-    }
-    
-    catch(error){
-
-    }
-}
 
 const addGuestSpeaker = async (req, res) => {
 
@@ -71,5 +51,5 @@ const removeGuestSpeaker = async (req, res) => {
 }
 
 
-module.exports={getAllEvent,addEvent,addGuestSpeaker,getAllGuestSpeakwer,removeEvent,removeGuestSpeaker}
+module.exports={addEvent,addGuestSpeaker,removeEvent,removeGuestSpeaker}
 
