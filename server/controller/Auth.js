@@ -5,8 +5,6 @@ const tempUser = require("../models/Tempuser")
 const jwt=require('jsonwebtoken');
 const JWT_SECRET="ecellPortal";
 
-
-
 const sendOtp = async(req,res)=>{
   const email=req.body.email;
   let otp = Math.floor(1000 + Math.random() * 9000);
@@ -53,10 +51,6 @@ const sendOtp = async(req,res)=>{
 
 }
 
-
-
-
-
 const verifyOtp = async(req,res)=>{
   const email=req.body.email;
   const otp=req.body.otp;
@@ -75,9 +69,6 @@ if(!otpCompare)
   res.status(500).send({msg:"Internal server error occured"})
 }
 }
-
-
-
 
 const registerUser = async(req,res)=>{
   let signup=false
@@ -105,8 +96,6 @@ const registerUser = async(req,res)=>{
       res.json({authToken,signup,msg:"Registered Successfully",userId:user._id})
   })
 }   
-
-
 
 const login = async(req,res)=>{
      let status=false
@@ -136,6 +125,5 @@ const login = async(req,res)=>{
         res.status(500).send({msg:"Internal server error occured"})
     }
 }
-
 
 module.exports ={sendOtp,verifyOtp,registerUser,login}
