@@ -15,7 +15,7 @@ import MyStartup from './pages/MyStartup.jsx'
 
 function App() {
   
-
+  
   return (
   <Routes>
     <Route path="/" element={<Intro/>}></Route>
