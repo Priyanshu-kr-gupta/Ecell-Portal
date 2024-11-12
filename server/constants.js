@@ -1,4 +1,4 @@
 module.exports = {
-  DB_NAME: "EcellPortal",
+  DB_NAME: "eCell-Portal",
 };
 

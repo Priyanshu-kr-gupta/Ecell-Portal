@@ -35,7 +35,7 @@ export default function Sidebar() {
 
         {userRole === 'Admin' && (
           <>
-            <Link to="/admin/dashboard" className="flex items-center py-4 text-lg">
+            <Link to="/admin/" className="flex items-center py-4 text-lg">
               <FaTachometerAlt className="mr-3" /> Admin Dashboard
             </Link>
             <Link to="/admin/manage-events" className="flex items-center py-4 text-lg">
@@ -58,7 +58,7 @@ export default function Sidebar() {
 
         {userRole === 'User' && (
           <>
-            <Link to="/user/dashboard" className="flex items-center py-5 text-lg">
+            <Link to="/user/" className="flex items-center py-5 text-lg">
               <FaTachometerAlt className="mr-3" /> User Dashboard
             </Link>
             <Link to="/user/events" className="flex items-center py-5 text-lg">

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState ,useEffect} from 'react';
 
 const AuthContext = createContext();
 
@@ -15,6 +15,12 @@ const handleUserId = (id) => {
   setUserId(id);
   localStorage.setItem('userId', id);
 };
+
+useEffect(() => {
+  if (localStorage.getItem('userId')) {
+    setIsAuthenticated(true);
+  }
+}, []);
 
   return (
     <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, userRole, setUserRole, handleRole, userId, handleUserId }}>

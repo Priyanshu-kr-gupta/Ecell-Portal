@@ -1,9 +1,13 @@
 require('dotenv').config();
 const express = require('express')
 const cors = require('cors');
+const bodyParser=require("body-parser")
 const app = express();
 app.use(express.json())  
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 const connectDB = require('./config/dbConnect');
 
