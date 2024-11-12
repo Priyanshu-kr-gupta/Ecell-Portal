@@ -5,10 +5,13 @@ const {upload} = require("../middlewares/multer.middleware");
 router.route('/add-event').post(
     upload.fields([
         { name: 'banner', maxCount: 1 },
-        { name: 'gallery', maxCount: 12 },   
     ]),
     AdminEndPoint.addEvent
 );
+
+router.route('/:id/add-gallery-img')
+.post(upload.single('gallery'),
+AdminEndPoint.addGalleryImg)
 
 router.route('/remove-event/:id').delete(AdminEndPoint.removeEvent);
 

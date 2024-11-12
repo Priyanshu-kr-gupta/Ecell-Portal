@@ -9,29 +9,24 @@ const { uploadOnCloudinary, uploadMultipleImages } = require('../utils/cloudinar
 // Controller to add a new event with banner and gallery images
 const addEvent = async (req, res) => {
     try {
-        console.log(req.file);
-        // console.log("hsdfih")
-        // const { name, intro, description } = req.body;
+        const { name, intro, description } = req.body;
+        // Upload banner image
+        const bannerImagePath = req.files.banner[0].path;
+        const bannerUrl = await uploadOnCloudinary(bannerImagePath);
         
-        // // Upload banner image
-        // const bannerImagePath = req.files.banner[0].path;
-        // const bannerUrl = await uploadOnCloudinary(bannerImagePath);
+        // Create and save a new event with only the banner image
+        const savedEvent = await Event.create({
+            name,
+            intro,
+            description,
+            banner: bannerUrl,
+            gallery: []  // Empty array for gallery (this can be updated later)
+        });
 
-        // // Create and save a new event with only the banner image
-        // const newEvent = new Event({
-        //     name,
-        //     intro,
-        //     description,
-        //     banner: bannerUrl,
-        //     gallery: []  // Empty array for gallery (this can be updated later)
-        // });
-
-        // const savedEvent = await newEvent.save();
-
-        // res.status(201).json({
-        //     message: 'Event added successfully',
-        //     event: savedEvent
-        // });
+        res.status(201).json({
+            message: 'Event added successfully',
+            event: savedEvent
+        });
     } catch (error) {
         res.status(500).json({
             message: 'Failed to add event',
@@ -40,6 +35,36 @@ const addEvent = async (req, res) => {
     }
 };
 
+ const addGalleryImg = async (req,res)=>{
+    try {
+        const {id} = req.params;
+        const event = Event.findById(id);
+        const imgPath = req.file.path;
+        console.log(imgPath)
+        if(!imgPath){
+            return res.json({
+                success:false,
+                message:"No gallery img found"
+            })
+        }
+        const imgUrl = await uploadOnCloudinary(imgPath);
+
+        await event.updateOne({
+            $push:{gallery:imgUrl}
+        })
+       
+        res.status(201).json({
+            success:true,
+            message:"Image upload Successfully"
+        })
+        
+    } catch (error) {
+        res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+ }
 
 
 
@@ -126,5 +151,5 @@ const removeGuestSpeaker = async (req, res) => {
 
 
 // Export admin endpoints
-module.exports={addEvent,addGuestSpeaker,removeEvent,removeGuestSpeaker}
+module.exports={addEvent, addGalleryImg , addGuestSpeaker,removeEvent,removeGuestSpeaker}
 
