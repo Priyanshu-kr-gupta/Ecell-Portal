@@ -11,7 +11,6 @@ const getUpcomingEvents = async (req, res) => {
   }
 };
 
-
 const getPastEvents = async (req, res) => {
   try {
     const pastEvents = await Event.find({ date: { $lt: new Date() } });
@@ -21,7 +20,6 @@ const getPastEvents = async (req, res) => {
     return res.status(500).json({ message: 'Server error while fetching past events' });
   }
 };
-
 
 const getAllGuestSpeakers = async (req, res) => {
   try {

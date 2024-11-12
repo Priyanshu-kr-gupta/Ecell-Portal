@@ -31,7 +31,7 @@ export default function ManageEvents() {
           useWebWorker: true, 
         });
 
-        formData.append('bannerImg', compressedFile, compressedFile.name);
+        formData.append('banner', compressedFile, compressedFile.name);
       } catch (error) {
         console.error('Image compression failed:', error);
       }
