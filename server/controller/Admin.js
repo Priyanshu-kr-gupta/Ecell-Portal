@@ -38,7 +38,7 @@ const addEvent = async (req, res) => {
 
  const addGalleryImg = async (req,res)=>{
     try {
-        const {id} = req.body;
+        const {id} = req.body.eventId;
         const event = Event.findById(id);
         const imgPath = req.file.path;
         console.log(imgPath)
