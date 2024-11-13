@@ -41,6 +41,9 @@ export default function Sidebar() {
             <Link to="/admin/manage-events" className="flex items-center py-4 text-lg">
               <FaCalendarAlt className="mr-3" /> Manage Events
             </Link>
+            <Link to="/admin/past-events" className="flex items-center py-4 text-lg">
+              <FaCalendarAlt className="mr-3" />Past Events
+            </Link>
             <Link to="/admin/manage-startups" className="flex items-center py-4 text-lg">
               <FaRocket className="mr-3" /> View Startups
             </Link>

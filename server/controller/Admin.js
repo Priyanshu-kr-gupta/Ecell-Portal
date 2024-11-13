@@ -9,7 +9,7 @@ const { uploadOnCloudinary, uploadMultipleImages } = require('../utils/cloudinar
 // Controller to add a new event with banner and gallery images
 const addEvent = async (req, res) => {
     try {
-        const { name, intro, description } = req.body;
+        const { name, intro, description,expectedDate } = req.body;
         // Upload banner image
         const bannerImagePath = req.files.banner[0].path;
         const bannerUrl = await uploadOnCloudinary(bannerImagePath);
@@ -20,6 +20,7 @@ const addEvent = async (req, res) => {
             intro,
             description,
             banner: bannerUrl,
+            expectedDate:expectedDate,
             gallery: []  // Empty array for gallery (this can be updated later)
         });
 
@@ -37,7 +38,7 @@ const addEvent = async (req, res) => {
 
  const addGalleryImg = async (req,res)=>{
     try {
-        const {id} = req.params;
+        const {id} = req.body;
         const event = Event.findById(id);
         const imgPath = req.file.path;
         console.log(imgPath)

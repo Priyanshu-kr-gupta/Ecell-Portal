@@ -13,6 +13,8 @@ import { Route, Routes } from 'react-router-dom';
 import GuestSpeaker from './pages/GuestSpeaker.jsx'
 import MyStartup from './pages/MyStartup.jsx'
 import ProtectedRoute from './components/ProtectedRoute';
+import PastEvents from './pages/PastEvents.jsx'
+import EventGallery from './pages/EventGallery.jsx'
 
 function App() {
   
@@ -32,6 +34,8 @@ function App() {
     <Route path="/admin/*" element={<ProtectedRoute allowedRoles={['Admin']}><Sidebar /></ProtectedRoute>}>
                 <Route path="" element={<AdminDashboard />} />
                 <Route path="manage-events" element={<ManageEvent/>} />
+                <Route path="event-gallary/:id" element={<EventGallery/>} />
+                <Route path="past-events" element={<PastEvents/>} />
                 <Route path="manage-startups" element={<ViewStartups/>} />
                 <Route path="guest-speaker" element={<GuestSpeaker/>} />
                 <Route path="Setting" element={<Setting />} />

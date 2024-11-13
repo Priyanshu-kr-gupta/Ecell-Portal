@@ -21,6 +21,10 @@ const eventSchema = new mongoose.Schema({
         type: String, //cloudinary img url
         required: true
     },
+    expectedDate:{
+        type:Date,
+        required:true
+    },
     gallery: {
         type: [String], // cloudinary images url  Array of strings for images
     }

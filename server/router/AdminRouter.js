@@ -9,7 +9,7 @@ router.route('/add-event').post(
     AdminEndPoint.addEvent
 );
 
-router.route('/:id/add-gallery-img')
+router.route('/add-gallery-img')
 .post(upload.single('gallery'),
 AdminEndPoint.addGalleryImg)
 
