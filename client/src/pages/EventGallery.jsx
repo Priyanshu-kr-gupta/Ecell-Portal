@@ -25,20 +25,16 @@ export default function EventGallery() {
     }
   };
 
-  // Handle file selection and compress them
   const handleFileChange = async (e) => {
     const selectedFiles = e.target.files;
     const compressedFiles = [];
 
-    // Compress each selected file
     for (let i = 0; i < selectedFiles.length; i++) {
       try {
         const file = selectedFiles[i];
-
-        // Define compression options (you can adjust these as needed)
         const options = {
           maxSizeMB: 1, // Limit file size to 1MB
-          maxWidthOrHeight: 800, // Set max width or height
+          maxWidthOrHeight: 1024, // Set max width or height
           useWebWorker: true,
         };
 
