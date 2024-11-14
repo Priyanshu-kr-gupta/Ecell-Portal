@@ -1,78 +1,77 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import imageCompression from 'browser-image-compression';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { AiOutlineUpload, AiOutlineClose } from "react-icons/ai";
+import imageCompression from "browser-image-compression";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function EventGallery() {
   const { id } = useParams();
   const [eventData, setEventData] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [files, setFiles] = useState([]);
+  const [gallery, setGallery] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   // Fetch event data
   const fetchEventData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/public/get-event', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id }),
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/public/get-event",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }),
+        }
+      );
       const data = await response.json();
       setEventData(data.event);
     } catch (error) {
-      console.error('Error fetching event data:', error);
+      console.error("Error fetching event data:", error);
     }
   };
 
-  const handleFileChange = async (e) => {
-    const selectedFiles = e.target.files;
-    const compressedFiles = [];
-
-    for (let i = 0; i < selectedFiles.length; i++) {
-      try {
-        const file = selectedFiles[i];
-        const options = {
-          maxSizeMB: 1, // Limit file size to 1MB
-          maxWidthOrHeight: 1024, // Set max width or height
-          useWebWorker: true,
-        };
-
-        const compressedFile = await imageCompression(file, options);
-        compressedFiles.push(compressedFile);
-      } catch (error) {
-        console.error('Error compressing file:', error);
-      }
-    }
-
-   
-    setFiles(compressedFiles);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setGallery(file);
   };
-
 
   const handleFileUpload = async (e) => {
-    e.preventDefault(); 
-
+    e.preventDefault();
+    setIsUploading(true);
     const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      formData.append('images', files[i]); 
-    }
-    formData.append('eventId', id); 
-    try {
-      const response = await fetch('http://localhost:5000/api/admin/add-gallery-img', {
-        method: 'POST',
-        body: formData,
-      });
+    formData.append("eventId", id);
 
-      const data = await response.json();
-      if (data.success) {
-        alert('Images uploaded successfully!');
-        setIsModalOpen(false); 
-      } else {
-        alert('Failed to upload images.');
+    if (gallery) {
+      try {
+        const compressedFile = await imageCompression(gallery, {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 1024,
+          useWebWorker: true,
+        });
+        formData.append("gallery", compressedFile, compressedFile.name);
+        const response = await fetch(
+          "http://localhost:5000/api/admin/add-gallery-img",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        const data = await response.json();
+        if (data.success) {
+          toast.success("Images uploaded successfully!");
+          setIsModalOpen(false);
+          setGallery(null);
+        } else {
+          toast.error("Failed to upload images.");
+        }
+      } catch (error) {
+        console.error("Image compression failed:", error);
+        toast.error("Image compression failed.");
+      } finally {
+        setIsUploading(false);
       }
-    } catch (error) {
-      console.error('Error uploading files:', error);
     }
   };
 
@@ -82,6 +81,7 @@ export default function EventGallery() {
 
   return (
     <div className="relative">
+      <ToastContainer position="top-center" />
       {eventData ? (
         <div className="w-full flex flex-col items-center text-white min-h-screen">
           <div
@@ -98,7 +98,9 @@ export default function EventGallery() {
 
           <div className="w-full py-16 flex justify-center">
             <div className="w-[80%] lg:w-[60%]">
-              <p className="text-lg font-medium mb-10">{eventData.description}</p>
+              <p className="text-lg font-medium mb-10">
+                {eventData.description}
+              </p>
             </div>
           </div>
         </div>
@@ -107,16 +109,19 @@ export default function EventGallery() {
       )}
 
       <button
-        className="absolute bottom-5 right-5 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+        className="absolute bottom-5 right-5 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 flex items-center gap-2"
         onClick={() => setIsModalOpen(!isModalOpen)}
       >
         Upload memories
       </button>
 
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40 p-2">
-          <div className="bg-white p-6 rounded-lg w-[90%] max-w-lg">
-            <h2 className="text-2xl font-bold mb-4">Upload Images to Gallery</h2>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40 p-4">
+          <div className="bg-white p-8 rounded-lg w-[90%] max-w-lg relative">
+          
+            <h2 className="text-2xl font-bold mb-4 text-center">
+              Upload Images to Gallery
+            </h2>
             <form onSubmit={handleFileUpload}>
               <input
                 type="file"
@@ -125,24 +130,24 @@ export default function EventGallery() {
                 onChange={handleFileChange}
                 className="mb-4"
               />
-              <br/>
+              <br />
               <div className="flex justify-end space-x-3 pt-4">
-              <button
-              className=" text-black bg-gray-300 rounded-md hover:bg-gray-400 px-4 py-2"
-              onClick={() => setIsModalOpen(false)}
-            >
-              Close
-            </button>
-              <button
-                type="submit"
-                className="px-4 py-2  text-white  bg-blue-600 rounded-lg hover:bg-blue-700"
-              >
-                Upload
-              </button>
-            
-            </div>
+                <button
+                  type="button"
+                  className="text-black bg-gray-300 rounded-md hover:bg-gray-400 px-4 py-2"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                  disabled={isUploading}
+                >
+                  {isUploading ? "Uploading..." : "Upload"}
+                </button>
+              </div>
             </form>
-           
           </div>
         </div>
       )}

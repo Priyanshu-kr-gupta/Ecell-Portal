@@ -1,7 +1,4 @@
 
-
-
-
 const Event = require('../models/Event');
 const GuestSpeaker = require('../models/GuestSpeaker');
 const { uploadOnCloudinary, uploadMultipleImages } = require('../utils/cloudinary');
@@ -35,38 +32,46 @@ const addEvent = async (req, res) => {
         });
     }
 };
-
- const addGalleryImg = async (req,res)=>{
+const addGalleryImg = async (req, res) => {
     try {
-        const {id} = req.body.eventId;
-        const event = Event.findById(id);
-        const imgPath = req.file.path;
-        console.log(imgPath)
-        if(!imgPath){
-            return res.json({
-                success:false,
-                message:"No gallery img found"
-            })
-        }
-        const imgUrl = await uploadOnCloudinary(imgPath);
-
-        await event.updateOne({
-            $push:{gallery:imgUrl}
-        })
-       
-        res.status(201).json({
-            success:true,
-            message:"Image upload Successfully"
-        })
-        
+      const { eventId } = req.body; // Ensure `eventId` is received properly
+      const event = await Event.findById(eventId); // Await here to ensure the database query completes
+  
+      if (!event) {
+        return res.status(404).json({
+          success: false,
+          message: "Event not found",
+        });
+      }
+  
+      const imgPath = req.file?.path;
+      if (!imgPath) {
+        return res.json({
+          success: false,
+          message: "No gallery image found",
+        });
+      }
+  
+      // Upload the image to Cloudinary
+      const imgUrl = await uploadOnCloudinary(imgPath);
+  
+      // Push the new image URL into the gallery array of the event
+      await event.updateOne({
+        $push: { gallery: imgUrl },
+      });
+  
+      res.status(201).json({
+        success: true,
+        message: "Image uploaded successfully",
+      });
     } catch (error) {
-        res.status(500).json({
-            success:false,
-            message:error.message
-        })
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
     }
- }
-
+  };
+  
 
 
 
