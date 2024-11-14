@@ -102,7 +102,7 @@ export default function ManageEvents() {
       <div className="h-full w-full overflow-y-auto flex flex-col">
 
         <div><h1 className="text-2xl font-semibold mb-4">All Events</h1></div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full place-items-center'>
             {upcomingEvent && upcomingEvent.length > 0 ? (
                     upcomingEvent.map((info, index) => <EventCard value={info} key={index} />)
             ) : (
