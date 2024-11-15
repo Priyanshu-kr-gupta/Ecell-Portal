@@ -139,7 +139,7 @@ const removeEvent = async (req, res) => {
 const addGuestSpeaker = async (req, res) => {
    
     try {
-        const {name, intro, about} = req.body;
+        const {name, intro, about , linkedin} = req.body;
         if(!name || !intro || !about){
             return res.status(400).json({message:"Please fill all the fields"});
         }
@@ -154,7 +154,8 @@ const addGuestSpeaker = async (req, res) => {
             name,
             intro,
             about,
-            avatar: avatarUrl
+            avatar: avatarUrl,
+            linkedin
         });
 
         const savedGuestSpeaker = await guestSpeaker.save();
