@@ -19,7 +19,6 @@ export default function ManageEvents() {
 
   const handleAddEvent = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append('name', eventData.name);
     formData.append('intro', eventData.intro);
@@ -134,73 +133,73 @@ export default function ManageEvents() {
 
       {/* Modal Popup */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40 p-2">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-40 p-2">
           <div className="w-96 bg-white rounded-lg shadow-lg p-6 z-50">
-            <h2 className="text-xl font-semibold mb-4">Add New Event</h2>
+            <h2 className="text-3xl font-bold text-blue-600 mb-4">Add New Event</h2>
             <form onSubmit={handleAddEvent} className="space-y-4">
               <label className="block">
-                <span className="text-gray-700">Name:</span>
+                <span className="text-lg text-gray-700">Name:</span>
                 <input
                   type="text"
                   name="name"
                   value={eventData.name}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
                   placeholder="Event Name"
                 />
               </label>
               <label className="block">
-                <span className="text-gray-700">Intro:</span>
+                <span className="text-lg text-gray-700">Intro:</span>
                 <input
                   type="text"
                   name="intro"
                   value={eventData.intro}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
                   placeholder="Short Introduction"
                 />
               </label>
               <label className="block">
-                <span className="text-gray-700">Description:</span>
+                <span className="text-lg text-gray-700">Description:</span>
                 <textarea
                   name="description"
                   value={eventData.description}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
                   placeholder="Event Description"
                   rows="3"
                 />
               </label>
               <label className="block">
-                <span className="text-gray-700">Banner Image:</span>
+                <span className="text-lg text-gray-700">Banner Image:</span>
                 <input
                   type="file"
                   accept="image/*"
                   onChange={handleFileChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
                 />
               </label>
               <label className="block">
-                <span className="text-gray-700">Expected Date:</span>
+                <span className="text-lg text-gray-700">Expected Date:</span>
                 <input
                   type="date"
                   name="expectedDate"
                   value={eventData.expectedDate}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300"
                 />
               </label>
               <div className="flex justify-end space-x-3 pt-4">
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+                  className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition duration-300"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300"
                 >
                   Save Event
                 </button>

@@ -107,8 +107,6 @@ export default function EventGallery() {
               </p>
             </div>
           </div>
-
-
           <div className="w-full py-16 flex justify-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-[90%] sm:w-[85%] lg:w-[80%] place-items-center">
           {eventData.gallery.slice((currentPage - 1) * imagesPerPage, currentPage * imagesPerPage).map((image, index) => (
