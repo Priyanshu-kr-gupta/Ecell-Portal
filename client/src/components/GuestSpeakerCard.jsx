@@ -4,7 +4,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 export default function GuestSpeakerCard(Props) {
   return (
     <div
-    key={Props.speaker._id}
+    
     className="bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300"
   >
     <a

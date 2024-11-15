@@ -14,15 +14,10 @@ router.route('/add-gallery-img')
 AdminEndPoint.addGalleryImg)
 
 
-
-
 router.route('/add-team-member').post(
     upload.single('profile'),
     AdminEndPoint.addTeamMember
   );
-
-
-router.route('/remove-event/:id').delete(AdminEndPoint.removeEvent);
 
 
 
@@ -30,6 +25,6 @@ router.route('/add-guest-speaker').post(
     upload.single('avatar'),
     AdminEndPoint.addGuestSpeaker);
 
-router.route('/remove-guest-speaker/:id').delete(AdminEndPoint.removeGuestSpeaker);
+router.route('/remove-document').post(AdminEndPoint.deleteDocument);
 
 module.exports = router;

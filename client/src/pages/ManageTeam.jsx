@@ -12,8 +12,8 @@ export default function ManageTeam() {
   });
   const [profileImgFile, setProfileImgFile] = useState(null);
   const [teamMembers, setTeamMembers] = useState([]);
-  const [selectedDesignation, setSelectedDesignation] = useState('Developer');
-  const designations = ['Developer', 'Designer', 'Manager', 'Tester'];
+  const [selectedDesignation, setSelectedDesignation] = useState('Faculty');
+  const designations = ['Faculty', 'Lead', 'Sponsorship', 'Web' ,'CRN','PR','Creative','Operations'];
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
@@ -56,7 +56,7 @@ export default function ManageTeam() {
       if (response.ok) {
         const data = await response.json();
         console.log('Team member added successfully:', data);
-        setTeamMembers([...teamMembers, data]);
+        fetchTeamMembers()
         setIsModalOpen(false);
       } else {
         console.error('Failed to add team member');
@@ -96,29 +96,42 @@ export default function ManageTeam() {
 
       {/* Filter by designation */}
       <div className="mb-5 pl-5">
-        <label className="mr-2 text-gray-700">Filter by Designation:</label>
-        <select
-          value={selectedDesignation}
-          onChange={(e) => setSelectedDesignation(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg"
-        >
-          {designations.map((designation) => (
-            <option key={designation} value={designation}>
-              {designation}
-            </option>
-          ))}
-        </select>
-      </div>
+  <label className="mr-4 text-gray-800 font-semibold text-lg">
+    Filter by Designation:
+  </label>
+  <select
+    value={selectedDesignation}
+    onChange={(e) => setSelectedDesignation(e.target.value)}
+    className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 bg-white transition-all duration-300 hover:shadow-lg"
+  >
+    <option value="" className="text-gray-500">
+      Select a Designation
+    </option>
+    {designations.map((designation) => (
+      <option
+        key={designation}
+        value={designation}
+        className="text-gray-700 hover:bg-indigo-100"
+      >
+        {designation}
+      </option>
+    ))}
+  </select>
+</div>
+
 
       {/* Display team members */}
-      <div className="lg:w-[70%] md:w-[80%] sm:w-[90%] w-full max-w-7xl px-4 mb-5 ">
+      <div className='w-full flex justify-center'>
+
+      <div className="lg:w-[70%] md:w-[80%] sm:w-[90%] w-full max-w-7xl px-4 mb-5">
           <div className="grid gap-5 max-[390px]:gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 lg:gap-10">
           {teamMembers.map((member) => (
-          <TeamCard member={member}/>
-         
-  ))}
+            <TeamCard member={member} key={member._id}/>
+            
+          ))}
   </div>
   </div>
+          </div>
   
 
       <button

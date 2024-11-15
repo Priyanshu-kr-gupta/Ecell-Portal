@@ -114,29 +114,7 @@ const addGalleryImg = async (req, res) => {
     }
   };
   
-
-const removeEvent = async (req, res) => {
-
-    try{
-        const eventId = req.params.id;
-
-        // Find the event by ID and remove it
-        const deletedEvent = await Event.findByIdAndDelete(eventId);
-
-        if (!deletedEvent) {
-            return res.status(404).json({ message: 'Event not found' });
-        }
-
-        res.status(200).json({ message: 'Event removed successfully' });
-
-    }
-    catch(error){
-        res.status(500).json({ message: 'Failed to remove event', error: error.message });
-    }
-}
-
-
-const addGuestSpeaker = async (req, res) => {
+  const addGuestSpeaker = async (req, res) => {
    
     try {
         const {name, intro, about , linkedin} = req.body;
@@ -175,28 +153,38 @@ const addGuestSpeaker = async (req, res) => {
 }
 
 
-const removeGuestSpeaker = async (req, res) => {
+const deleteDocument = async (req, res) => {
+  try {
+    const { modelName, id } = req.body;
 
-    try{
-        const guestSpeakerId = req.params.id;
-
-        // Find the guest speaker by ID and remove it
-        const deletedGuestSpeaker = await GuestSpeaker.findByIdAndDelete(guestSpeakerId);
-
-        if (!deletedGuestSpeaker) {
-            return res.status(404).json({ message: 'Guest Speaker not found' });
-        }
-
-        res.status(200).json({ message: 'Guest Speaker removed successfully' });
-
-    }
+    const models = {
+      Event,
+      GuestSpeaker,
+      TeamMember
     
-    catch(error){
-        res.status(500).json({ message: 'Failed to remove guest speaker', error: error.message });
+    };
+
+    const Model = models[modelName];
+    console.log(modelName,Model)
+    if (!Model) {
+      return res.status(400).json({ message: 'Invalid model name' });
     }
-}
+
+    const deletedDocument = await Model.findByIdAndDelete(id);
+    if (!deletedDocument) {
+      return res.status(404).json({ message: `${modelName} not found` });
+    }
+
+    res.status(200).json({ message: `${modelName} removed successfully` });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Failed to remove document', error: error.message });
+  }
+};
+
+
 
 
 // Export admin endpoints
-module.exports={addEvent, addGalleryImg , addGuestSpeaker,removeEvent,removeGuestSpeaker,addTeamMember}
+module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument}
 
