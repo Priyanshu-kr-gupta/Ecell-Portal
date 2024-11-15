@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import imageCompression from 'browser-image-compression';
+import TeamCard from '../components/TeamCard';
 
 export default function ManageTeam() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,22 +11,21 @@ export default function ManageTeam() {
     linkedin: '',
   });
   const [profileImgFile, setProfileImgFile] = useState(null);
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [selectedDesignation, setSelectedDesignation] = useState('Developer');
+  const designations = ['Developer', 'Designer', 'Manager', 'Tester'];
 
-  // Toggle modal visibility
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setTeamMemberData({ ...teamMemberData, [name]: value });
   };
 
-  // Handle file input change
   const handleFileChange = (e) => {
     setProfileImgFile(e.target.files[0]);
   };
 
-  // Handle form submission
   const handleAddTeamMember = async (e) => {
     e.preventDefault();
 
@@ -37,13 +37,11 @@ export default function ManageTeam() {
 
     if (profileImgFile) {
       try {
-        // Compress the image before appending to formData
         const compressedFile = await imageCompression(profileImgFile, {
           maxSizeMB: 1,
           maxWidthOrHeight: 1024,
           useWebWorker: true,
         });
-
         formData.append('profile', compressedFile, compressedFile.name);
       } catch (error) {
         console.error('Image compression failed:', error);
@@ -55,10 +53,10 @@ export default function ManageTeam() {
         method: 'POST',
         body: formData,
       });
-
       if (response.ok) {
         const data = await response.json();
         console.log('Team member added successfully:', data);
+        setTeamMembers([...teamMembers, data]);
         setIsModalOpen(false);
       } else {
         console.error('Failed to add team member');
@@ -68,11 +66,61 @@ export default function ManageTeam() {
     }
   };
 
+  const fetchTeamMembers = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/public/get-team-members', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ designation: selectedDesignation }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setTeamMembers(data.teamMembers);
+      } else {
+        console.error('Failed to fetch team members');
+      }
+    } catch (error) {
+      console.error('Error during API call:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTeamMembers();
+  }, [selectedDesignation]);
+
   return (
     <div>
       <h1 className="text-2xl font-bold m-4">Manage Team</h1>
 
-      {/* Button to open modal */}
+      {/* Filter by designation */}
+      <div className="mb-5 pl-5">
+        <label className="mr-2 text-gray-700">Filter by Designation:</label>
+        <select
+          value={selectedDesignation}
+          onChange={(e) => setSelectedDesignation(e.target.value)}
+          className="px-4 py-2 border border-gray-300 rounded-lg"
+        >
+          {designations.map((designation) => (
+            <option key={designation} value={designation}>
+              {designation}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Display team members */}
+      <div className="lg:w-[70%] md:w-[80%] sm:w-[90%] w-full max-w-7xl px-4 mb-5 ">
+          <div className="grid gap-5 max-[390px]:gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 lg:gap-10">
+          {teamMembers.map((member) => (
+          <TeamCard member={member}/>
+         
+  ))}
+  </div>
+  </div>
+  
+
       <button
         onClick={toggleModal}
         className="bg-blue-500 text-white py-2 px-4 rounded fixed bottom-5 right-5"
@@ -82,7 +130,7 @@ export default function ManageTeam() {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center p-2">
           <div className="bg-white p-6 rounded-lg w-96">
             <h2 className="text-xl font-semibold mb-4">Add New Team Member</h2>
             <form onSubmit={handleAddTeamMember}>
@@ -99,14 +147,20 @@ export default function ManageTeam() {
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700">Designation</label>
-                <input
-                  type="text"
+                <select
                   name="designation"
                   value={teamMemberData.designation}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                   required
-                />
+                >
+                  <option value="">Select Designation</option>
+                  {designations.map((designation) => (
+                    <option key={designation} value={designation}>
+                      {designation}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700">Email</label>

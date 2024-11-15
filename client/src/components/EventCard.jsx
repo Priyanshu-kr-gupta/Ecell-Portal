@@ -13,7 +13,7 @@ export default function EventCard(Props) {
           src={Props.value.banner}
           alt={Props.value.name}
           effect="blur"
-          className="transition-transform duration-500 group-hover:scale-110  hover:scale-105 w-[400px] object-cover h-[300px]"
+          className="group-hover:scale-110 transition-transform duration-500 ease-in-out w-[400px] object-cover h-[300px]  "
           
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-75 group-hover:opacity-90 transition-opacity duration-500"></div>

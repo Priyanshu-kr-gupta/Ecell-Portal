@@ -93,7 +93,7 @@ export default function EventGallery() {
             style={{ backgroundImage: `url(${eventData.banner})` }}
           >
             <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-            <div className="relative z-10 w-full flex justify-center">
+            <div className="relative w-full flex justify-center">
               <h1 className="text-7xl font-bold mb-6 w-[90%] break-words">
                 {eventData.name}
               </h1>

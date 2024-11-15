@@ -1,5 +1,6 @@
 const GuestSpeaker = require('../models/GuestSpeaker');
 const Event = require('../models/Event');
+const TeamMember= require('../models/Team')
 
 const getUpcomingEvents = async (req, res) => {
   try {
@@ -84,4 +85,13 @@ const getObjectCount = async (req, res) => {
 };
 
 
-module.exports = { getUpcomingEvents, getPastEvents, getAllGuestSpeakers, getObjectCount ,getParticularEvent};
+const getTeamMember = async(req,res)=>{
+  const { designation } = req.body;
+  try {
+    const teamMembers = await TeamMember.find({ designation });
+    res.json({teamMembers});
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch team members' });
+  }
+}
+module.exports = { getUpcomingEvents, getPastEvents, getAllGuestSpeakers, getObjectCount ,getParticularEvent,getTeamMember};

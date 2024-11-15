@@ -98,9 +98,9 @@ export default function ManageEvents() {
 
   
   return (
-    <div className="h-screen overflow-hidden relative p-5 bg-gray-50">
+    <div className="h-screen overflow-y-auto relative p-5 bg-gray-50">
       {/* Events Section */}
-      <div className="h-full w-full overflow-y-auto flex flex-col">
+      <div className="h-full w-full flex flex-col">
 
         <div><h1 className="text-2xl font-semibold mb-4">All Events</h1></div>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full place-items-center'>
@@ -110,7 +110,7 @@ export default function ManageEvents() {
             <p>No upcoming events</p>
           )}
         </div>
-        <div className="flex justify-center mt-4 space-x-2 ">
+        <div className="flex justify-center p-6 space-x-2">
           {Array(totalPages).fill().map((_, index) => (
             <button
               key={index + 1}
@@ -128,7 +128,7 @@ export default function ManageEvents() {
       {/* Add Event Button */}
       <button
         onClick={openModal}
-        className="absolute bottom-5 right-5 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+        className="fixed bottom-5 right-5 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700" 
       >
         Add Event
       </button>

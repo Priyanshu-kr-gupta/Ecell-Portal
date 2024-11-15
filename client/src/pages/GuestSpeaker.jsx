@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import GuestSpeakerCard from "../components/GuestSpeakerCard";
 
 export default function GuestSpeaker() {
   const [speakers, setSpeakers] = useState([]);
@@ -55,7 +56,7 @@ export default function GuestSpeaker() {
     formData.append("intro", speakerData.intro);
     formData.append("about", speakerData.about);
     formData.append("linkedin", speakerData.linkedin);
-    formData.append("avatar", speakerData.avatar); // Append the image file
+    formData.append("avatar", speakerData.avatar); 
     setLoading(true);
     try {
       // Send the formData to your server
@@ -86,9 +87,9 @@ export default function GuestSpeaker() {
   }, []);
   // console.log(speakers);
   return (
-    <div className="h-screen overflow-hidden relative p-5 bg-gray-50">
+    <div className="h-screen  overflow-y-auto relative p-5 bg-gray-50">
       {/* Guest Speakers Section */}
-      <div className="h-full overflow-y-auto">
+      <div className="h-full">
         <h1 className="text-2xl font-semibold mb-4">Guest Speakers</h1>
 
         {/* Guest Speakers List */}
@@ -99,28 +100,7 @@ export default function GuestSpeaker() {
             </p>
           ) : (
             speakers.map((speaker) => (
-              <div
-                key={speaker._id}
-                className="bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300"
-              >
-                <a
-                  href={speaker.linkedin} // Link to LinkedIn
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block overflow-hidden rounded-lg mb-4 cursor-pointer"
-                >
-                  <img
-                    src={speaker.avatar}
-                    alt={speaker.name}
-                    className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
-                  />
-                </a>
-                <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                  {speaker.name}
-                </h2>
-                <p className="text-gray-600 mb-2">{speaker.intro}</p>
-                <div className="text-gray-400 text-sm">{speaker.position}</div>
-              </div>
+             <GuestSpeakerCard speaker={speaker}/>
             ))
           )}
         </div>
@@ -129,7 +109,7 @@ export default function GuestSpeaker() {
       {/* Add Speaker Button */}
       <button
         onClick={openModal}
-        className="absolute bottom-5 right-5 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+        className="fixed bottom-5 right-5 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
       >
         Add Guest Speaker
       </button>
