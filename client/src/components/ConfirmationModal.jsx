@@ -11,22 +11,22 @@ const ConfirmationModal = (Props) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({modelName: 'Event',id: Props.id,
+          body: JSON.stringify({modelName: Props.modelName,id: Props.id,
           }),
         });
 
         const data = await response.json();
         if (response.ok) {
-          alert('Event removed successfully');
+          alert('removed successfully');
           Props.onClose();
         } else {
-          alert(data.message || 'Failed to remove event');
+          alert(data.message || 'Failed to remove');
         }
       } catch (error) {
         alert('Error: ' + error.message);
       }
     } else {
-      alert('Event name does not match. Please try again.');
+      alert(" name does not match. Please try again.");
     }
   };
 
@@ -34,7 +34,7 @@ const ConfirmationModal = (Props) => {
 
   return (
     
-        <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-10">
           <div className="bg-white p-6 rounded-lg shadow-md max-w-sm w-full">
             <h3 className="text-xl font-bold mb-4">Confirm Deletion</h3>
             <p className="mb-4">Type "<strong>{Props.name}</strong>" to confirm.</p>

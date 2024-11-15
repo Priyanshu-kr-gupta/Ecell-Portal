@@ -1,13 +1,19 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { AiOutlineLinkedin, } from 'react-icons/ai';
 import { MdOutlineEmail } from "react-icons/md";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { FaTrashAlt } from 'react-icons/fa'; 
+import ConfirmationModal from './ConfirmationModal';
+
 export default function TeamCard(Props) {
+  const [showConfirm, setShowConfirm] = useState(false);
+
   return (
+    <>
     <div
            className="bg-white w-full h-48 md:h-60 lg:h-72 rounded-lg shadow-lg flex relative overflow-hidden group"
-           key={Props.member._id}
+       
          >
            <LazyLoadImage
              src={Props.member.image || 'default-profile.jpg'}
@@ -24,7 +30,7 @@ export default function TeamCard(Props) {
                </h2>
                <p className="text-sm text-gray-300">{Props.member.designation}</p>
              </div>
-         
+            
              <div className="flex items-center justify-center mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                <a
                  href={Props.member.linkedin}
@@ -41,7 +47,18 @@ export default function TeamCard(Props) {
                  <MdOutlineEmail size={28} />
                </a>
              </div>
+             
            </div>
+           <button
+      onClick={() => setShowConfirm(true)}
+      className="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full hover:bg-red-700 focus:outline-none"
+      >
+      <FaTrashAlt className="w-3 h-3" />
+    </button>
          </div>
+         
+          {showConfirm && 
+            <ConfirmationModal modelName="TeamMember" id={Props.member._id} name={Props.member.name} imgUrl={Props.member.image} onClose={()=>{setShowConfirm(false)}}/>}
+            </>
   )
 }

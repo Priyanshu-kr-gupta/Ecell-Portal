@@ -114,11 +114,11 @@ export default function GuestSpeaker() {
             </p>
           ) : (
             speakers.map((speaker) => (
-             <GuestSpeakerCard speaker={speaker}/>
+             <GuestSpeakerCard speaker={speaker} key={speaker._id}/>
             ))
           )}
         </div>
-        <div className="flex justify-center mt-4 space-x-2 ">
+        <div className="flex justify-center p-5 space-x-2 ">
           {Array(totalPages).fill().map((_, index) => (
             <button
               key={index + 1}

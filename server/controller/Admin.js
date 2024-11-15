@@ -160,12 +160,11 @@ const deleteDocument = async (req, res) => {
     const models = {
       Event,
       GuestSpeaker,
-      TeamMember
+      TeamMember,
     
     };
 
     const Model = models[modelName];
-    console.log(modelName,Model)
     if (!Model) {
       return res.status(400).json({ message: 'Invalid model name' });
     }
