@@ -14,6 +14,7 @@ export default function ManageEvents() {
   const [bannerImgFile, setBannerImgFile] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -24,7 +25,6 @@ export default function ManageEvents() {
     formData.append('intro', eventData.intro);
     formData.append('description', eventData.description);
     formData.append('expectedDate', eventData.expectedDate);
-
     if (bannerImgFile) {
       try {
           const compressedFile = await imageCompression(bannerImgFile, {
@@ -38,7 +38,7 @@ export default function ManageEvents() {
         console.error('Image compression failed:', error);
       }
     }
-
+    setLoading(true);
     try {
       const response = await fetch('http://localhost:5000/api/admin/add-event', {
         method: 'POST',
@@ -52,8 +52,10 @@ export default function ManageEvents() {
       }
     } catch (error) {
       console.error('Error during API call:', error);
+    }finally{
+      setLoading(false);
+      fetchEvents();
     }
-
     closeModal();
   };
 
@@ -201,7 +203,7 @@ export default function ManageEvents() {
                   type="submit"
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300"
                 >
-                  Save Event
+                 { loading ? "Event Saving..." : " Save Event "}
                 </button>
               </div>
             </form>
