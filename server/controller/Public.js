@@ -5,11 +5,9 @@ const getUpcomingEvents = async (req, res) => {
   try {
     const page = parseInt(req.body.currentPage) || 1;
     const limit = 6; 
-
     const upcomingEvents = await Event.find({ expectedDate: { $gte: new Date() } })
       .skip((page - 1) * limit)
       .limit(limit);
-
     const totalEvents = await Event.countDocuments({ expectedDate: { $gte: new Date() } });
     const totalPages = Math.ceil(totalEvents / limit);
     return res.status(200).json({
