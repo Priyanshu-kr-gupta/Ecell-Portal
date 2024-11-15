@@ -11,6 +11,8 @@ export default function GuestSpeaker() {
     about: "",
     linkedin: "",
   });
+  const[currentPage, setCurrentPage] = useState(1);
+  const[totalPages, setTotalPages] = useState(1);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -20,13 +22,21 @@ export default function GuestSpeaker() {
     try {
       setLoading(true);
       const response = await fetch(
-        "http://localhost:5000/api/public/get-all-guest-speakers"
+        "http://localhost:5000/api/public/get-all-guest-speakers",{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ currentPage }),
+        }
       );
-      const data = await response.json();
       if (!response.ok) {
         throw new Error("Failed to fetch guest speakers");
       }
-      setSpeakers(data);
+      const data = await response.json();
+      setSpeakers(data.guestSpeakers);
+      setTotalPages(data.totalPages);
+
     } catch (error) {
       console.error("Error fetching guest speakers:", error);
       setSpeakers([]);
@@ -77,13 +87,17 @@ export default function GuestSpeaker() {
       console.error("Error saving speaker:", error);
     }finally{
       setLoading(false);
+      speakerData.name = "";
+      speakerData.intro = "";
+      speakerData.about = "";
+      speakerData.linkedin = "";
     }
   };
 
   // Fetch guest speakers data on component mount
   useEffect(() => {
     fetchGuestSpeakers();
-  }, []);
+  }, [currentPage]);
   // console.log(speakers);
   return (
     <div className="h-screen overflow-hidden relative p-5 bg-gray-50">
@@ -123,6 +137,19 @@ export default function GuestSpeaker() {
               </div>
             ))
           )}
+        </div>
+        <div className="flex justify-center mt-4 space-x-2 ">
+          {Array(totalPages).fill().map((_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => setCurrentPage(index+1)}
+              className={`px-3 py-1 border rounded ${
+                currentPage === index + 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
         </div>
       </div>
 
