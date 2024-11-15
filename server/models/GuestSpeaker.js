@@ -16,7 +16,11 @@ const guestSpeakerSchema = new mongoose.Schema({
     about: {
         type: String,
         required: true
-    }
+    },
+    linkedin: {
+        type: String,
+    },
+   
 });
 
 module.exports = mongoose.model('GuestSpeaker', guestSpeakerSchema);
