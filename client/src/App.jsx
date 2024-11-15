@@ -14,6 +14,7 @@ import MyStartup from "./pages/MyStartup.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PastEvents from "./pages/PastEvents.jsx";
 import EventGallery from "./pages/EventGallery.jsx";
+import ManageTeam from "./pages/ManageTeam.jsx";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="event-gallary/:id" element={<EventGallery />} />
         <Route path="past-events" element={<PastEvents />} />
         <Route path="manage-startups" element={<ViewStartups />} />
+        <Route path="manage-teams" element={<ManageTeam/>}/>
         <Route path="guest-speaker" element={<GuestSpeaker />} />
         <Route path="Setting" element={<Setting />} />
       </Route>

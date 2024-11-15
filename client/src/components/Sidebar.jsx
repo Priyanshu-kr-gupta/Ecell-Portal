@@ -47,7 +47,7 @@ export default function Sidebar() {
             <Link to="/admin/manage-startups" className="flex items-center py-4 text-lg">
               <FaRocket className="mr-3" /> View Startups
             </Link>
-            <Link to="/admin/manage-teams" className="flex items-center py-4 text-lg cursor-not-allowed pointer-events-none" >
+            <Link to="/admin/manage-teams" className="flex items-center py-4 text-lg " >
               <FaUsers className="mr-3" /> Manage Team
             </Link>
             <Link to="/admin/guest-speaker" className="flex items-center py-4 text-lg " >

@@ -1,6 +1,7 @@
 
 const Event = require('../models/Event');
 const GuestSpeaker = require('../models/GuestSpeaker');
+const TeamMember= require('../models/Team')
 const { uploadOnCloudinary, uploadMultipleImages } = require('../utils/cloudinary');
 
 // Controller to add a new event with banner and gallery images
@@ -32,6 +33,7 @@ const addEvent = async (req, res) => {
         });
     }
 };
+
 const addGalleryImg = async (req, res) => {
     try {
       const { eventId } = req.body; // Ensure `eventId` is received properly
@@ -73,7 +75,45 @@ const addGalleryImg = async (req, res) => {
   };
   
 
-
+  const addTeamMember = async (req, res) => {
+    try {
+      const { name, designation, email, linkedin } = req.body;
+  
+      const profileImagePath = req.file?.path;
+      let profileUrl = null;
+      
+      if (profileImagePath) {
+        profileUrl = await uploadOnCloudinary(profileImagePath);
+      } else {
+        return res.status(400).json({
+          success: false,
+          message: "Profile image is required",
+        });
+      }
+  
+      const savedTeamMember = await TeamMember.create({
+        name,
+        designation,
+        email,
+        linkedin,
+        image: profileUrl, 
+      });
+  
+      res.status(201).json({
+        success: true,
+        message: 'Team member added successfully',
+     
+      });
+    } catch (error) {
+        console.log(error)
+      res.status(500).json({
+        success: false,
+        message: 'Failed to add team member',
+        error: error.message,
+      });
+    }
+  };
+  
 
 const removeEvent = async (req, res) => {
 
@@ -157,5 +197,5 @@ const removeGuestSpeaker = async (req, res) => {
 
 
 // Export admin endpoints
-module.exports={addEvent, addGalleryImg , addGuestSpeaker,removeEvent,removeGuestSpeaker}
+module.exports={addEvent, addGalleryImg , addGuestSpeaker,removeEvent,removeGuestSpeaker,addTeamMember}
 
