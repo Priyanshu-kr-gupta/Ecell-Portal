@@ -6,7 +6,7 @@ const ConfirmationModal = (Props) => {
   const handleDelete = async () => {
     if (inputValue === Props.name) {
       try {
-        const response = await fetch('http://localhost:5000/api/admin/remove-document', {
+        const response = await fetch( import.meta.env.VITE_BACKEND_URL+'/api/admin/remove-document', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

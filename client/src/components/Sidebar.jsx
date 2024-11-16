@@ -41,8 +41,8 @@ export default function Sidebar() {
             <Link to="/admin/manage-events" className="flex items-center py-4 text-lg">
               <FaCalendarAlt className="mr-3" /> Manage Events
             </Link>
-            <Link to="/admin/past-events" className="flex items-center py-4 text-lg">
-              <FaCalendarAlt className="mr-3" />Past Events
+            <Link to="/admin/ecell-forms-build" className="flex items-center py-4 text-lg">
+              <FaCalendarAlt className="mr-3" />Create new Form
             </Link>
             <Link to="/admin/manage-startups" className="flex items-center py-4 text-lg">
               <FaRocket className="mr-3" /> View Startups
@@ -52,6 +52,9 @@ export default function Sidebar() {
             </Link>
             <Link to="/admin/guest-speaker" className="flex items-center py-4 text-lg " >
               <FaUsers className="mr-3" /> Guest Speakers
+            </Link>
+            <Link to="/admin/past-events" className="flex items-center py-4 text-lg">
+              <FaCalendarAlt className="mr-3" />Past Events
             </Link>
             <Link to="/admin/Setting" className="flex items-center py-4 text-lg">
               <FaCog className="mr-3" /> Setting

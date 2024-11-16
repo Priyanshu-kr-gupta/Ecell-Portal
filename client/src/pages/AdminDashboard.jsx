@@ -12,7 +12,7 @@ export default function AdminDashboard() {
   // Fetch counts for a specific model
   const fetchCounts = async (modelName) => {
     try {
-      const response = await fetch('http://localhost:5000/api/public/get-object-count', {
+      const response = await fetch( import.meta.env.VITE_BACKEND_URL+"/api/public/get-object-count", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

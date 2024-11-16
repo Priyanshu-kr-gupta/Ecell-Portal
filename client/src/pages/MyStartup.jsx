@@ -17,7 +17,7 @@ export default function MyStartup() {
   const [loading, setLoading] = useState(true);
   const checkRegistration = async ()=> {
     try {
-      const response = await fetch('http://localhost:5000/api/User/check-startup', {
+      const response = await fetch( import.meta.env.VITE_BACKEND_URL+'/api/User/check-startup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export default function MyStartup() {
     event.preventDefault();
   
     try {
-      const response = await fetch('http://localhost:5000/api/User/register-startup', {
+      const response = await fetch( import.meta.env.VITE_BACKEND_URL+'/api/User/register-startup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
