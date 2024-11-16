@@ -23,7 +23,7 @@ export default function GuestSpeaker() {
     try {
       setLoading(true);
       const response = await fetch(
-        "http://localhost:5000/api/public/get-all-guest-speakers",{
+        import.meta.env.VITE_BACKEND_URL+"/api/public/get-all-guest-speakers",{
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export default function GuestSpeaker() {
     try {
       // Send the formData to your server
       const response = await fetch(
-        "http://localhost:5000/api/admin/add-guest-speaker",
+        import.meta.env.VITE_BACKEND_URL+"/api/admin/add-guest-speaker",
         {
           method: "POST",
           body: formData,
