@@ -19,7 +19,7 @@ export default function EventGallery() {
   const fetchEventData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/public/get-event",
+        import.meta.env.VITE_BACKEND_URL+"/api/public/get-event",
         {
           method: "POST",
           headers: {
@@ -56,7 +56,7 @@ export default function EventGallery() {
         });
         formData.append("gallery", compressedFile, compressedFile.name);
         const response = await fetch(
-          "http://localhost:5000/api/admin/add-gallery-img",
+          import.meta.env.VITE_BACKEND_URL+"/api/admin/add-gallery-img",
           {
             method: "POST",
             body: formData,

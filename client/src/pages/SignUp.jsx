@@ -27,7 +27,7 @@ export default function SignUp() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/Auth/sendOtp', {
+      const response = await fetch(import.meta.env.VITE_BACKEND_URL+'/api/Auth/sendOtp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export default function SignUp() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/Auth/verifyOtp', {
+      const response = await fetch(import.meta.env.VITE_BACKEND_URL+'/api/Auth/verifyOtp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export default function SignUp() {
         // toast.success('OTP Verified! Registration successful.');
         setOtpVerified(true);
         try {
-          const register = await fetch('http://localhost:5000/api/Auth/register', {
+          const register = await fetch(import.meta.env.VITE_BACKEND_URL+'/api/Auth/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

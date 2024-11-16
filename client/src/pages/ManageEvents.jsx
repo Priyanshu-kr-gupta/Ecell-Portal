@@ -40,7 +40,7 @@ export default function ManageEvents() {
     }
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/admin/add-event', {
+      const response = await fetch(import.meta.env.VITE_BACKEND_URL+'/api/admin/add-event', {
         method: 'POST',
         body: formData,
       });
@@ -62,7 +62,7 @@ export default function ManageEvents() {
 
   const fetchEvents =  async() => {
     try {
-      const response = await fetch('http://localhost:5000/api/public/get-upcoming-events', {
+      const response = await fetch(import.meta.env.VITE_BACKEND_URL+'/api/public/get-upcoming-events', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

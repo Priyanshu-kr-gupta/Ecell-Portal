@@ -9,7 +9,7 @@ export default function PastEvents() {
 
     const fetchEvents =  async() => {
         try {
-          const response = await fetch('http://localhost:5000/api/public/get-past-events', {
+          const response = await fetch(import.meta.env.VITE_BACKEND_URL+'/api/public/get-past-events', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
