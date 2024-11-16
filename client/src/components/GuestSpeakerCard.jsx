@@ -21,7 +21,7 @@ export default function GuestSpeakerCard(Props) {
       <LazyLoadImage
         src={Props.speaker.avatar}
         alt={Props.speaker.name}
-        className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
+        className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110 bg-slate-100"
         />
     </a>
     <h2 className="text-xl font-semibold text-gray-800 mb-2">

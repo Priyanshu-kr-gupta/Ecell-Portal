@@ -18,7 +18,7 @@ export default function TeamCard(Props) {
            <LazyLoadImage
              src={Props.member.image || 'default-profile.jpg'}
              alt={Props.member.name}
-             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out"
+             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out bg-slate-100"
            />
          
            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>

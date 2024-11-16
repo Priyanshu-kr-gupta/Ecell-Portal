@@ -64,8 +64,11 @@ export default function Sidebar() {
             <Link to="/user/" className="flex items-center py-5 text-lg">
               <FaTachometerAlt className="mr-3" /> User Dashboard
             </Link>
-            <Link to="/user/events" className="flex items-center py-5 text-lg">
-              <FaCalendarAlt className="mr-3" /> View Events
+            <Link to="/user/upcoming-events" className="flex items-center py-5 text-lg">
+              <FaCalendarAlt className="mr-3" /> Upcoming Events
+            </Link>
+            <Link to="/user/past-events" className="flex items-center py-5 text-lg">
+              <FaCalendarAlt className="mr-3" /> Past Events
             </Link>
             <Link to="/user/my-startup" className="flex items-center py-5 text-lg">
               <FaRocket className="mr-3" /> My Startup

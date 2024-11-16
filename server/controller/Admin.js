@@ -156,7 +156,7 @@ const addGalleryImg = async (req, res) => {
 const deleteDocument = async (req, res) => {
   try {
     const { modelName, id ,imgPath } = req.body;
-    console.log(imgPath)
+    // console.log(imgPath)
     const models = {
       Event,
       GuestSpeaker,

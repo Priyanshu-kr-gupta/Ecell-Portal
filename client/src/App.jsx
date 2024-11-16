@@ -31,6 +31,9 @@ function App() {
         }
       >
         <Route index element={<UserDashboard />} />
+        <Route path="upcoming-events" element={<ManageEvent />} />
+        <Route path="event-gallary/:id" element={<EventGallery />} />
+        <Route path="past-events" element={<PastEvents />} />
         <Route path="my-startup" element={<MyStartup />} />
       </Route>
 

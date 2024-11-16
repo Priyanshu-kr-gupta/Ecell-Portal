@@ -1,6 +1,6 @@
-const GuestSpeaker = require('../models/GuestSpeaker');
 const Event = require('../models/Event');
 const TeamMember= require('../models/Team')
+const GuestSpeaker = require('../models/GuestSpeaker');
 
 const getUpcomingEvents = async (req, res) => {
   try {
@@ -94,15 +94,41 @@ const getObjectCount = async (req, res) => {
   try {
     const { modelName } = req.body;
 
-    const count = await modelName.countDocuments({});
+    const models = {
+      Event,
+      GuestSpeaker,
+      TeamMember,
+    };
+
+    if (modelName === 'Event') {
+      const upcomingEvents = await Event.countDocuments({
+        expectedDate: { $gte: new Date() },
+      });
+      const passedEvents = await Event.countDocuments({
+        expectedDate: { $lt: new Date() },
+      });
+
+      return res.status(200).json({
+        upcoming: upcomingEvents,
+        passed: passedEvents,
+      });
+    }
+
+    const Model = models[modelName];
+    if (!Model) {
+      return res.status(400).json({ message: 'Invalid model name' });
+    }
+
+    const count = await Model.countDocuments({});
     return res.status(200).json({ count });
   } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({ message: "Server error while counting objects" });
+    return res.status(500).json({
+      message: 'Server error while counting objects',
+    });
   }
 };
+
 
 const getTeamMember = async(req,res)=>{
   const { designation } = req.body;

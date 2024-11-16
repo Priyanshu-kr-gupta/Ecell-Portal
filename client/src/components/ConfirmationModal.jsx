@@ -11,7 +11,7 @@ const ConfirmationModal = (Props) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({modelName: Props.modelName,id: Props.id,
+          body: JSON.stringify({modelName: Props.modelName,id: Props.id,imgPath:Props.imgUrl
           }),
         });
 

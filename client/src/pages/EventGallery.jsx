@@ -4,8 +4,10 @@ import toast, { Toaster } from 'react-hot-toast';
 import { AiOutlineUpload, AiOutlineClose } from "react-icons/ai";
 import imageCompression from "browser-image-compression";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useAuth } from '../context/AuthContext';
 
 export default function EventGallery() {
+  const { userRole } = useAuth();
   const { id } = useParams();
   const [eventData, setEventData] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -153,14 +155,17 @@ export default function EventGallery() {
       ) : (
         <p>Loading event details...</p>
       )}
-        
-      <button
+       {
+        userRole==="Admin"?
+        <button
         className="absolute bottom-5 right-5 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 flex items-center gap-2"
         onClick={() => setIsModalOpen(!isModalOpen)}
       >
         Upload memories
       </button>
-
+:''
+       } 
+      
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40 p-4">
           <div className="bg-white p-8 rounded-lg w-[90%] max-w-lg relative">

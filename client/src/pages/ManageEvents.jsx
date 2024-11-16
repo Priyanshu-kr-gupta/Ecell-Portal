@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import imageCompression from 'browser-image-compression';
 import EventCard from '../components/EventCard';
-
+import { useAuth } from '../context/AuthContext';
 export default function ManageEvents() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { userRole } = useAuth();
   const [eventData, setEventData] = useState({
     name: '',
     intro: '',
@@ -126,12 +127,17 @@ export default function ManageEvents() {
       </div>
 
       {/* Add Event Button */}
-      <button
+      {
+        userRole==="Admin"?
+        <button
         onClick={openModal}
         className="fixed bottom-5 right-5 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700" 
       >
         Add Event
       </button>
+        :''
+      }
+      
 
       {/* Modal Popup */}
       {isModalOpen && (
