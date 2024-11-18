@@ -35,8 +35,8 @@ export default function NewQuestion({ id, onUpdate, onDelete }) {
   };
 
   return (
-    <div className="w-full max-w-[800px] mt-4 p-6 bg-slate-50 flex flex-col items-center">
-      <div className="w-full flex flex-wrap justify-between items-center">
+    <div className="w-full max-w-[800px] mt-4 p-6 bg-slate-50 flex flex-col items-center relative">
+      <div className="w-full flex flex-wrap justify-end items-center">
         <input
           type="text"
           placeholder="Enter your question"
@@ -59,10 +59,12 @@ export default function NewQuestion({ id, onUpdate, onDelete }) {
           <option>Short Answer</option>
           <option>Paragraph</option>
           <option>Multiple Choice</option>
+          <option>Dropdown</option>
+          <option>Checkboxes</option>
         </select>
       </div>
 
-      {questionType === 'Multiple Choice' && (
+      {['Multiple Choice', 'Dropdown', 'Checkboxes'].includes(questionType) &&(
         <div className="w-full">
           {options.map((option, index) => (
             <div key={index} className="flex items-center mb-2">
@@ -104,8 +106,15 @@ export default function NewQuestion({ id, onUpdate, onDelete }) {
           />
           Required
         </label>
-
+            
+        <button
+          onClick={() => onDelete(id)}
+          className="px-4 py-2 text-red-500"
+        >
+          <FaTrash className="mr-2" />
+        </button>
       </div>
+      
     </div>
   );
 }
