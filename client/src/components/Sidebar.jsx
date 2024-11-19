@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX} from 'react-icons/fi';
+import { SiGoogleforms } from "react-icons/si";
 import { FaTachometerAlt, FaCalendarAlt, FaRocket, FaUsers, FaCog } from 'react-icons/fa';
 
 export default function Sidebar() {
@@ -41,8 +42,8 @@ export default function Sidebar() {
             <Link to="/admin/manage-events" className="flex items-center py-4 text-lg">
               <FaCalendarAlt className="mr-3" /> Manage Events
             </Link>
-            <Link to="/admin/ecell-forms-build" className="flex items-center py-4 text-lg">
-              <FaCalendarAlt className="mr-3" />Create new Form
+            <Link to="/admin/ecell-forms" className="flex items-center py-4 text-lg">
+              <SiGoogleforms className="mr-3" />Ecell Forms
             </Link>
             <Link to="/admin/manage-startups" className="flex items-center py-4 text-lg">
               <FaRocket className="mr-3" /> View Startups

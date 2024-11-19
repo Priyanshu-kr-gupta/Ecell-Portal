@@ -38,6 +38,40 @@ export default function EcellFormBuilder() {
       return remainingQuestions;
     });
   };
+
+  const handleSaveForm = async () => {
+    try {
+      const formData = {
+        title: formTitle,
+        description: formDescription,
+        questions: formQuestions.map((question) => ({
+          text: question.text,
+          type: question.type,
+          options: question.options || [],
+          required: question.required || false,
+        })),
+      };
+  
+      const response = await fetch(  import.meta.env.VITE_BACKEND_URL+"/api/admin/create-form", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        alert('Form saved successfully!');
+      } else {
+        alert(`Error: ${data.error || 'Failed to save form'}`);
+      }
+    } catch (error) {
+      console.error('Error saving form:', error);
+      alert('An unexpected error occurred while saving the form.');
+    }
+  };
   
 
   return (
@@ -81,8 +115,14 @@ export default function EcellFormBuilder() {
           Add Question
         </button>
 
-     
       </div>
+      
+      <button
+  onClick={handleSaveForm}
+  className="fixed bottom-2 right-2  ml-auto px-4 py-2 max-w-[200px] mt-4 text-white bg-green-600 rounded-lg hover:bg-green-700"
+>
+  Save Form
+</button>
     </>
   );
 }

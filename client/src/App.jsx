@@ -16,6 +16,8 @@ import PastEvents from "./pages/PastEvents.jsx";
 import EventGallery from "./pages/EventGallery.jsx";
 import ManageTeam from "./pages/ManageTeam.jsx";
 import EcellFormBuilder from "./pages/EcellFormBuilder.jsx";
+import EcellForms from "./pages/EcellForms.jsx"
+import PostEcellForm from "./pages/PostEcellForm.jsx";
 
 function App() {
   return (
@@ -50,7 +52,9 @@ function App() {
         <Route path="manage-events" element={<ManageEvent />} />
         <Route path="event-gallary/:id" element={<EventGallery />} />
         <Route path="past-events" element={<PastEvents />} />
-        <Route path="ecell-forms-build" element={<EcellFormBuilder />} />
+        <Route path="ecell-forms" element={<EcellForms />} />
+        <Route path="ecell-forms/create" element={<EcellFormBuilder/>}/>
+        <Route path="ecell-forms/post/:formId" element={<PostEcellForm/>}/>
         <Route path="manage-startups" element={<ViewStartups />} />
         <Route path="manage-teams" element={<ManageTeam/>}/>
         <Route path="guest-speaker" element={<GuestSpeaker />} />

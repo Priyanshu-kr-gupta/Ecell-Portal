@@ -2,6 +2,8 @@
 const Event = require('../models/Event');
 const GuestSpeaker = require('../models/GuestSpeaker');
 const TeamMember= require('../models/Team')
+const EcellForm = require('../models/EcellForm')
+
 const { uploadOnCloudinary, uploadMultipleImages } = require('../utils/cloudinary');
 
 // Controller to add a new event with banner and gallery images
@@ -161,6 +163,7 @@ const deleteDocument = async (req, res) => {
       Event,
       GuestSpeaker,
       TeamMember,
+      EcellForm
     
     };
 
@@ -182,8 +185,38 @@ const deleteDocument = async (req, res) => {
 };
 
 
+const createForm = async(req,res)=>{
+  try {
+    const { title, description, questions } = req.body;
+    const newForm = new EcellForm({
+      title,
+      description,
+      questions,
+    });
+    const savedForm = await newForm.save();
+    res.status(201).json({
+      message: 'Form created successfully.',
+      form: savedForm,
+    });
+  } catch (error) {
+    console.error('Error creating form:', error.message);
+    res.status(500).json({ error: 'An error occurred while creating the form.' });
+  }
+
+}
+
+const getForms = async (req, res) => {
+  try {
+    const forms = await EcellForm.find().select('_id title description');
+    res.status(200).json({ forms });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch forms' });
+  }
+};
 
 
-// Export admin endpoints
-module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument}
+
+
+module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms}
 

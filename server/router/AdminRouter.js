@@ -27,4 +27,9 @@ router.route('/add-guest-speaker').post(
 
 router.route('/remove-document').post(AdminEndPoint.deleteDocument);
 
+
+//ecellform
+router.route('/create-form').post(AdminEndPoint.createForm);
+router.route('/get-forms').get(AdminEndPoint.getForms);
+
 module.exports = router;
