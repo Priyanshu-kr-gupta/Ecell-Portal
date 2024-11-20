@@ -268,9 +268,7 @@ const togglePublish = async (req, res) => {
 
 
 
-// <<<<<<< main
-// module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,addNotice}
-// =======
-module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,getForm,updateEndDate,togglePublish}
-// >>>>>>> main
+module.exports={addEvent, addGalleryImg,addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,getForm,updateEndDate,togglePublish,addNotice}
+
+
 
