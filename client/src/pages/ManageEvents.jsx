@@ -99,11 +99,11 @@ export default function ManageEvents() {
 
   
   return (
-    <div className="h-screen overflow-y-auto relative p-5 bg-gray-50">
+    <div className="h-screen overflow-y-auto relative p-5 ">
       {/* Events Section */}
       <div className="h-full w-full flex flex-col">
 
-        <div><h1 className="text-2xl font-semibold mb-4">All Events</h1></div>
+        <div><h1 className="text-2xl font-semibold mb-4 text-white pt-10">All Events</h1></div>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full place-items-center'>
             {upcomingEvent && upcomingEvent.length > 0 ? (
                     upcomingEvent.map((info, index) => <EventCard value={info} key={index} />)

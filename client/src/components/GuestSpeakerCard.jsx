@@ -10,7 +10,7 @@ export default function GuestSpeakerCard(Props) {
    <>
     <div
     
-    className="bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300"
+    className="bg-[#222E3C] text-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300"
     >
     <a
       href={Props.speaker.linkedin} // Link to LinkedIn
@@ -21,13 +21,13 @@ export default function GuestSpeakerCard(Props) {
       <LazyLoadImage
         src={Props.speaker.avatar}
         alt={Props.speaker.name}
-        className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110 bg-slate-100"
+        className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110 bg-[#2E3A4D]"
         />
     </a>
-    <h2 className="text-xl font-semibold text-gray-800 mb-2">
+    <h2 className="text-xl font-semibold mb-2">
       {Props.speaker.name}
     </h2>
-    <p className="text-gray-600 mb-2">{Props.speaker.intro}</p>
+    <p className="text-gray-300 mb-2">{Props.speaker.intro}</p>
     <div className="text-gray-400 text-sm">{Props.speaker.position}</div>
     <button
       onClick={() => setShowConfirm(true)}

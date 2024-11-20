@@ -33,7 +33,7 @@ export default function PastEvents() {
         fetchEvents();
       },[currentPage])
     return (
-        <div className="h-screen overflow-hidden relative p-5 bg-gray-50">
+        <div className="h-screen overflow-hidden relative p-5 text-white pt-10">
     <div className="h-full w-full overflow-y-auto flex flex-col">
 
     <div><h1 className="text-2xl font-semibold mb-4">Past Events</h1></div>

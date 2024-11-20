@@ -18,9 +18,11 @@ import ManageTeam from "./pages/ManageTeam.jsx";
 import EcellFormBuilder from "./pages/EcellFormBuilder.jsx";
 import EcellForms from "./pages/EcellForms.jsx"
 import PostEcellForm from "./pages/PostEcellForm.jsx";
+import Header from "./components/Header.jsx";
 
 function App() {
   return (
+    <>
     <Routes>
       <Route path="/" element={<Intro />}></Route>
       <Route path="/login" element={<Login />}></Route>
@@ -32,7 +34,7 @@ function App() {
             <Sidebar />
           </ProtectedRoute>
         }
-      >
+        >
         <Route index element={<UserDashboard />} />
         <Route path="upcoming-events" element={<ManageEvent />} />
         <Route path="event-gallary/:id" element={<EventGallery />} />
@@ -47,7 +49,7 @@ function App() {
             <Sidebar />
           </ProtectedRoute>
         }
-      >
+        >
         <Route index element={<AdminDashboard />} />
         <Route path="manage-events" element={<ManageEvent />} />
         <Route path="event-gallary/:id" element={<EventGallery />} />
@@ -61,6 +63,7 @@ function App() {
         <Route path="Setting" element={<Setting />} />
       </Route>
     </Routes>
+        </>
   );
 }
 

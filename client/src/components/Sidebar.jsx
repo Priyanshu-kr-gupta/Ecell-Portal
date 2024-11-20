@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { FiMenu, FiX} from 'react-icons/fi';
 import { SiGoogleforms } from "react-icons/si";
 import { FaTachometerAlt, FaCalendarAlt, FaRocket, FaUsers, FaCog } from 'react-icons/fa';
+import Header from "../components/Header.jsx";
 
 export default function Sidebar() {
   const { userRole } = useAuth();
@@ -14,12 +15,13 @@ export default function Sidebar() {
   };
 
   return (
+    <>
     <div className="lg:flex">
       {/* Sidebar Toggle Button */}
       <button
-        className={`absolute top-4 ${isSidebarOpen ? 'left-48 text-white' : 'left-4 text-black'} px-3 py-1 lg:hidden z-20`}
+        className={`absolute top-2 ${isSidebarOpen ? 'left-56 top-5 text-white' : 'left-2 text-white'} px-3 py-1 lg:hidden z-20`}
         onClick={toggleSidebar}
-      >
+        >
         {isSidebarOpen ? <FiX size={24} /> : <FiMenu size={24} />}
       </button>
 
@@ -27,8 +29,8 @@ export default function Sidebar() {
       <div
         className={`${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0 h-[100vh] lg:relative fixed lg:flex-shrink-0 w-64 bg-gradient-to-b from-[#25334d] to-[#1a2a3c] border-r border-[#273a79] p-10 text-white transition-transform duration-300 z-10`}
-      >
+        } lg:translate-x-0 h-[100vh] lg:relative fixed lg:flex-shrink-0 w-72 bg-[#222E3C] p-10 text-white transition-transform duration-300 z-10  border-[10px] border-[#19222C]`}
+        >
         <div className="text-2xl font-semibold mb-2">
           E-cell Portal
         </div>
@@ -86,8 +88,12 @@ export default function Sidebar() {
 
       {/* Main Content */}
       <div className="w-full">
-        <Outlet />
+ 
+
+          <Outlet />
       </div>
+
     </div>
+        </>
   );
 }

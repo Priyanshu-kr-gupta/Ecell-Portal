@@ -35,14 +35,15 @@ const ConfirmationModal = (Props) => {
   return (
     
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-10">
-          <div className="bg-white p-6 rounded-lg shadow-md max-w-sm w-full">
+          <div className="bg-[#222E3C] p-6 rounded-lg shadow-md max-w-sm w-full text-white">
             <h3 className="text-xl font-bold mb-4">Confirm Deletion</h3>
             <p className="mb-4">Type "<strong>{Props.name}</strong>" to confirm.</p>
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              className="border p-2 rounded w-full mb-4"
+              className="border p-2 rounded w-full mb-4 bg-[#2E3A4D] outline-none border-[#3A4A5F]"
+              
             />
 
             <div className="flex justify-end gap-5">

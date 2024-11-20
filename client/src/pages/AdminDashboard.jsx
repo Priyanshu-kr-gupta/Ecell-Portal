@@ -60,7 +60,7 @@ export default function AdminDashboard() {
   }, []);
 
   return (
-    <div className="w-full h-[100vh] bg-gray-100 p-8">
+    <div className="w-full h-[100vh] p-8 text-white overflow-auto">
       <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <CountCard path="http://localhost:5173/admin/manage-teams" title="Team Members" count={counts.teamMembers} />

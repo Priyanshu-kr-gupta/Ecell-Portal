@@ -102,7 +102,7 @@ export default function EventGallery() {
             </div>
           </div>
 
-          <div className="w-full py-10 flex justify-center text-black">
+          <div className="w-full py-10 flex justify-center ">
             <div className="w-[80%] lg:w-[60%]">
               <p className="text-lg font-medium mb-10">
                 {eventData.description}

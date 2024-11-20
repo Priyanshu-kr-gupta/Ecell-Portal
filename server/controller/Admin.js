@@ -216,7 +216,17 @@ const getForms = async (req, res) => {
 };
 
 
+const getForm = async (req, res) => {
+  try {
+    const {formId}=req.body;
+    const form = await EcellForm.find({_id:formId});
+    res.status(200).json({ form });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch form' });
+  }
+};
 
 
-module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms}
+module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,getForm}
 
