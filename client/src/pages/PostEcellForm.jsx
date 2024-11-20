@@ -22,8 +22,8 @@ export default function PostEcellForm() {
         const data = await response.json();
         if (response.ok) {
           setFormDetails(data.form[0]);
-          // setIsPublished(data.form.isPublished);
-          // setEndDate(data.form.endDate || '');
+          setIsPublished(data.form[0].isPublished);
+          setEndDate(data.form[0].endDate.slice(0,10) || '');
         } else {
           console.error(data.error || 'Failed to fetch form details');
         }
@@ -38,7 +38,7 @@ export default function PostEcellForm() {
   const togglePublish = async () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/admin/publish-form/${formId}`, {
-        method: 'PATCH',
+        method: 'Post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isPublished: !isPublished }),
       });
@@ -55,7 +55,7 @@ export default function PostEcellForm() {
   const updateEndDate = async () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/admin/set-end-date/${formId}`, {
-        method: 'PATCH',
+        method: 'Post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ endDate }),
       });
@@ -140,33 +140,42 @@ export default function PostEcellForm() {
 </>      
       }
 
-      {tab==='Publish' && 
-      <div className="mt-6 flex flex-col gap-4">
-       
-
-        <div className="flex items-center gap-4">
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            className="p-2 border rounded-lg"
-          />
-          <button
-            onClick={updateEndDate}
-            className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
-          >
-            Set End Date
-          </button>
-          
-        </div>
+     {tab === 'Publish' && (
+  <div className="mt-6 flex flex-col gap-6 p-4 bg-[#222E3C] text-white rounded-lg shadow-md">
+    <div>
+      <label className="block text-lg font-semibold mb-2">Set or Update End Date:</label>
+      <div className="flex items-center gap-4">
+        <input
+          type="date"
+          value={endDate}
+          min={new Date().toISOString().split('T')[0]}
+          onChange={(e) => setEndDate(e.target.value)}
+          className="p-2 border rounded-lg bg-[#2E3A4D] border-[#3A4A5F] outline-none text-white"
+        />
         <button
-          onClick={togglePublish}
-          className={`px-4 py-2 text-white rounded-lg ${isPublished ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'}`}
+          onClick={updateEndDate}
+          className="px-4 py-2 bg-blue-500 rounded-lg hover:bg-blue-600"
         >
-          {isPublished ? 'Unpublish Form' : 'Publish Form'}
+          {endDate ? 'Update Date' : 'Set End Date'}
         </button>
       </div>
-      }
+    </div>
+    <div>
+      <label className="block text-lg font-semibold mb-2">Publish or Unpublish Form:</label>
+      <button
+        onClick={togglePublish}
+        className={`px-6 py-3 text-lg font-bold rounded-lg ${
+          isPublished
+            ? 'bg-red-500 hover:bg-red-600'
+            : 'bg-green-500 hover:bg-green-600'
+        }`}
+      >
+        {isPublished ? 'Unpublish Form' : 'Publish Form'}
+      </button>
+    </div>
+  </div>
+)}
+
     {tab==='Responses' && 
         <button
         

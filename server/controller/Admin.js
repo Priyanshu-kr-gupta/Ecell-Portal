@@ -227,6 +227,38 @@ const getForm = async (req, res) => {
   }
 };
 
+const updateEndDate = async (req, res) => {
 
-module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,getForm}
+  const { formId } = req.params;
+  const { endDate } = req.body;
+  try {
+    const updatedForm = await EcellForm.updateOne(
+      { _id: formId },
+      { $set: { endDate: endDate } },
+    );
+    res.status(200).json({ message: 'End date updated successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update end date' });
+  }
+};
+
+
+const togglePublish = async (req, res) => {
+  const { formId } = req.params;
+  const { isPublished } = req.body; 
+  try {
+    const updatedForm = await EcellForm.updateOne(
+      { _id: formId },
+      { $set: { isPublished } }
+    );
+    res.status(200).json({ message: 'Form publish status updated successfully' });
+  } catch (error) {
+    console.error('Error updating publish status:', error);
+    res.status(500).json({ error: 'Failed to update publish status' });
+  }
+};
+
+
+
+module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,getForm,updateEndDate,togglePublish}
 
