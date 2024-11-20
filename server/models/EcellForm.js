@@ -29,7 +29,19 @@ const formSchema = new mongoose.Schema({
     type: String,
     default: '', 
   },
-  questions: [questionSchema], 
+  questions: {
+    type: [questionSchema],
+    required: true,
+  },
+  isPublished: {
+    type: Boolean,
+    default: false,
+  },
+  endDate: {
+    type: Date,
+    default: null,
+  },
+  
 }, { timestamps: true }); 
 
 module.exports = mongoose.model('EcellForm', formSchema);

@@ -31,6 +31,10 @@ router.route('/remove-document').post(AdminEndPoint.deleteDocument);
 //ecellform
 router.route('/create-form').post(AdminEndPoint.createForm);
 router.route('/get-forms').get(AdminEndPoint.getForms);
+router.route('/get-form').post(AdminEndPoint.getForm);
+router.route('/publish-form/:formId').post(AdminEndPoint.togglePublish);
+router.route('/set-end-date/:formId').post(AdminEndPoint.updateEndDate);
+
 
 router.route('/add-notice').post(AdminEndPoint.addNotice);
 

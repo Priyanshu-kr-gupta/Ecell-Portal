@@ -224,7 +224,53 @@ const addNotice = async(req,res) =>{
 }
 
 
+const getForm = async (req, res) => {
+  try {
+    const {formId}=req.body;
+    const form = await EcellForm.find({_id:formId});
+    res.status(200).json({ form });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch form' });
+  }
+};
+
+const updateEndDate = async (req, res) => {
+
+  const { formId } = req.params;
+  const { endDate } = req.body;
+  try {
+    const updatedForm = await EcellForm.updateOne(
+      { _id: formId },
+      { $set: { endDate: endDate } },
+    );
+    res.status(200).json({ message: 'End date updated successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update end date' });
+  }
+};
 
 
-module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,addNotice}
+const togglePublish = async (req, res) => {
+  const { formId } = req.params;
+  const { isPublished } = req.body; 
+  try {
+    const updatedForm = await EcellForm.updateOne(
+      { _id: formId },
+      { $set: { isPublished } }
+    );
+    res.status(200).json({ message: 'Form publish status updated successfully' });
+  } catch (error) {
+    console.error('Error updating publish status:', error);
+    res.status(500).json({ error: 'Failed to update publish status' });
+  }
+};
+
+
+
+// <<<<<<< main
+// module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,addNotice}
+// =======
+module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,getForm,updateEndDate,togglePublish}
+// >>>>>>> main
 

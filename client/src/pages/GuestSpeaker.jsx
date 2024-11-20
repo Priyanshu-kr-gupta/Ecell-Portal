@@ -101,7 +101,7 @@ export default function GuestSpeaker() {
   }, [currentPage]);
   // console.log(speakers);
   return (
-    <div className="h-screen  overflow-y-auto relative p-5 bg-gray-50">
+    <div className="h-screen  overflow-y-auto relative p-5 text-white">
       {/* Guest Speakers Section */}
       <div className="h-full">
         <h1 className="text-2xl font-semibold mb-4">Guest Speakers</h1>

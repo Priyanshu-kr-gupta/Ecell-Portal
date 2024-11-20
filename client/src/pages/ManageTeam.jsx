@@ -92,11 +92,11 @@ export default function ManageTeam() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold m-4">Manage Team</h1>
+      <h1 className="text-2xl font-bold m-4 pt-6 text-white">Manage Team</h1>
 
       {/* Filter by designation */}
       <div className="mb-5 pl-5">
-  <label className="mr-4 text-gray-800 font-semibold text-lg">
+  <label className="mr-4 text-gray-300 font-semibold text-lg">
     Filter by Designation:
   </label>
   <select
@@ -121,7 +121,7 @@ export default function ManageTeam() {
 
 
       {/* Display team members */}
-      <div className='w-full flex justify-center'>
+      <div className='w-full flex justify-center mt-10'>
 
       <div className="lg:w-[70%] md:w-[80%] sm:w-[90%] w-full max-w-7xl px-4 mb-5">
           <div className="grid gap-5 max-[390px]:gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 lg:gap-10">

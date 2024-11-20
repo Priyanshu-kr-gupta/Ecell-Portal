@@ -24,15 +24,15 @@ export default function EcellForms() {
   }, []);
 
   return (
-    <div className="w-full h-screen p-5 overflow-y-auto flex flex-col  bg-gray-100">
+    <div className="w-full h-screen p-5 overflow-y-auto flex flex-col text-white">
       <h1 className="text-3xl font-bold mb-10 p-4">Ecell Forms</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-[1200px]">
      
         <Link
           to="/admin/ecell-forms/create"
-          className="flex flex-col items-center justify-center border-2 border-dashed border-blue-500 rounded-lg p-6 hover:bg-blue-100"
+          className="flex flex-col items-center justify-center border-2 border-dashed border-blue-400 rounded-lg  min-h-[150px] hover:bg-[#222E3C]"
         >
-          <div className="text-blue-500 text-4xl font-bold mb-2">+</div>
+          <div className="text-blue-400 text-4xl font-bold mb-2">+</div>
           {/* <div className="text-lg text-blue-500 font-semibold">Create New Form</div> */}
         </Link>
 

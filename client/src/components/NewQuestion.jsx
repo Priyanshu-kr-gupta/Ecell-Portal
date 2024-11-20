@@ -35,7 +35,7 @@ export default function NewQuestion({ id, onUpdate, onDelete }) {
   };
 
   return (
-    <div className="w-full max-w-[800px] mt-4 p-6 bg-slate-50 flex flex-col items-center relative">
+    <div className="w-full max-w-[800px] mt-4 p-6 bg-[#222E3C] flex flex-col items-center relative">
       <div className="w-full flex flex-wrap justify-end items-center">
         <input
           type="text"
@@ -45,11 +45,11 @@ export default function NewQuestion({ id, onUpdate, onDelete }) {
             setQuestionText(e.target.value);
             handleUpdate();
           }}
-          className="w-full p-3 mb-4 text-lg border-b outline-none"
+          className="w-full p-3 mb-4 text-lg border-b outline-none border-[#3A4A5F] bg-[#2E3A4D] text-white"
         />
 
         <select
-          className="max-w-[200px] p-3 mb-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="max-w-[200px] p-3 mb-4 border rounded-md text-white  border-[#3A4A5F] bg-[#2E3A4D] outline-none"
           value={questionType}
           onChange={(e) => {
             setQuestionType(e.target.value);
@@ -73,7 +73,7 @@ export default function NewQuestion({ id, onUpdate, onDelete }) {
                 placeholder={`Option ${index + 1}`}
                 value={option}
                 onChange={(e) => updateOption(index, e.target.value)}
-                className="w-full max-w-[200px] p-2 m-2 mb-0 text-lg border rounded-md outline-none"
+                className="w-full max-w-[200px] p-2 m-2 mb-0 text-lg border rounded-md outline-none border-[#3A4A5F] bg-[#2E3A4D] text-white"
               />
               <button
                 onClick={() => removeOption(index)}
@@ -85,7 +85,7 @@ export default function NewQuestion({ id, onUpdate, onDelete }) {
           ))}
           <button
             onClick={addOption}
-            className="flex items-center text-blue-600 hover:text-blue-800"
+            className="flex items-center text-blue-400 hover:text-blue-500"
           >
             <FaPlus className="mr-2" />
             Add Option
@@ -94,7 +94,7 @@ export default function NewQuestion({ id, onUpdate, onDelete }) {
       )}
 
       <div className="w-full flex items-center justify-end mt-4">
-        <label className="flex items-center">
+        <label className="flex items-center text-white">
           <input
             type="checkbox"
             checked={required}
@@ -102,7 +102,7 @@ export default function NewQuestion({ id, onUpdate, onDelete }) {
               setRequired(e.target.checked);
               handleUpdate();
             }}
-            className="mr-2 w-4 h-4"
+            className="mr-2 w-4 h-4 "
           />
           Required
         </label>

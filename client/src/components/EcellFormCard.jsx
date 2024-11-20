@@ -8,14 +8,15 @@ export default function EcellFormCard({title,formId}) {
 
   return (
     <>
-    <div className='text-blue-500 min-h-[150px] relative font-semibold cursor-pointer  border-gray-300 rounded-lg p-4 shadow-md bg-white'>
+    <div className='text-white min-h-[150px] relative font-semibold cursor-pointer   rounded-lg p-4 shadow-md bg-[#222E3C]'>
             <Link 
               to={`/admin/ecell-forms/post/${formId}`}
-              className="w-full h-full flex flex-col items-center justify-center border"
+              className="w-full h-full flex flex-col items-center justify-center border-blue-400 border-2"
             >
             <h2 className="text-xl font-bold mb-2">{title || 'Untitled Form'}</h2>
             
                 </Link>
+
             <button
                     onClick={() => setShowConfirm(true)}
                     className="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full hover:bg-red-700 focus:outline-none"

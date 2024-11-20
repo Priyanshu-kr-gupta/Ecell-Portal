@@ -77,7 +77,7 @@ export default function EcellFormBuilder() {
   return (
     <>
       <div className="w-full h-screen p-5 overflow-y-auto flex flex-col">
-      <h1 className="text-2xl font-bold m-4 p-4  left-0">Ecell-Forms</h1>
+      <h1 className="text-2xl font-bold m-4 p-4  left-0 text-white">Ecell-Forms</h1>
         
         <div className="w-full flex flex-col items-center">
           <input
@@ -85,14 +85,14 @@ export default function EcellFormBuilder() {
             placeholder="Untitled Form"
             value={formTitle}
             onChange={(e) => setFormTitle(e.target.value)}
-            className="w-full max-w-[1000px] min-w-[300px] p-3 mb-4 text-4xl outline-none focus:border-b-2 focus:border-blue-500"
+            className="w-full max-w-[1000px] min-w-[300px] p-3 bg-[#19222C] mb-4 text-4xl outline-none focus:border-b-2 focus:border-blue-500 text-white"
           />
           <input
             type="text"
             placeholder="Form Description"
             value={formDescription}
             onChange={(e) => setFormDescription(e.target.value)}
-            className="w-full max-w-[1000px] min-w-[300px] p-3 mb-4 text-lg outline-none focus:border-b-2 focus:border-blue-500"
+            className="w-full max-w-[1000px] min-w-[300px] p-3 mb-4 bg-[#19222C] text-lg outline-none focus:border-b-2 focus:border-blue-500 text-white"
           />
         </div>
 
