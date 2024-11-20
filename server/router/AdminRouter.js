@@ -32,4 +32,6 @@ router.route('/remove-document').post(AdminEndPoint.deleteDocument);
 router.route('/create-form').post(AdminEndPoint.createForm);
 router.route('/get-forms').get(AdminEndPoint.getForms);
 
+router.route('/add-notice').post(AdminEndPoint.addNotice);
+
 module.exports = router;

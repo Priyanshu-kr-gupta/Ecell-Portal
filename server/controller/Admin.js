@@ -215,8 +215,16 @@ const getForms = async (req, res) => {
   }
 };
 
+const addNotice = async(req,res) =>{
+  try {
+    
+  } catch (error) {
+    
+  }
+}
 
 
 
-module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms}
+
+module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,addNotice}
 
