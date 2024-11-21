@@ -18,7 +18,9 @@ import ManageTeam from "./pages/ManageTeam.jsx";
 import EcellFormBuilder from "./pages/EcellFormBuilder.jsx";
 import EcellForms from "./pages/EcellForms.jsx"
 import PostEcellForm from "./pages/PostEcellForm.jsx";
+import ActiveForms from "./pages/ActiveForms.jsx"
 import Header from "./components/Header.jsx";
+import FillForm from "./pages/FillForm.jsx";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
         >
         <Route index element={<UserDashboard />} />
         <Route path="upcoming-events" element={<ManageEvent />} />
+        <Route path="active-forms" element={<ActiveForms />} />
+        <Route path="fill-form/:formId" element={<FillForm />} />
         <Route path="event-gallary/:id" element={<EventGallery />} />
         <Route path="past-events" element={<PastEvents />} />
         <Route path="my-startup" element={<MyStartup />} />

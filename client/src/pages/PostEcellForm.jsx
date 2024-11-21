@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect} from 'react';
 import { useParams } from "react-router-dom";
 export default function PostEcellForm() {
 
@@ -6,7 +6,6 @@ export default function PostEcellForm() {
   const [formDetails, setFormDetails] = useState({});
   const [isPublished, setIsPublished] = useState(false);
   const [endDate, setEndDate] = useState('');
-  const [responses, setResponses] = useState([]);
   const [tab,setTab]=useState('Preview');
   useEffect(() => {
     const fetchFormDetails = async () => {

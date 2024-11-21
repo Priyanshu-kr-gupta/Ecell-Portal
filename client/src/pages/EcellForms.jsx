@@ -38,7 +38,7 @@ export default function EcellForms() {
 
         {forms.map((form) => (
        
-          <EcellFormCard key={form._id} title={form.title} formId={form._id}/>
+          <EcellFormCard key={form._id} title={form.title} formId={form._id} path="/admin/ecell-forms/post"/>
         ))}
       </div>
     </div>

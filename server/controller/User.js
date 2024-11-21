@@ -1,4 +1,5 @@
 const Startup = require("../models/Startup");
+const EcellForm = require('../models/EcellForm')
 
 const checkStartupRegistration = async (req, res) => {
     try {
@@ -40,4 +41,27 @@ const registerStartup = async (req, res) => {
     }
 };
 
-module.exports = { checkStartupRegistration, registerStartup };
+const getActiveForm = async (req, res) => {
+    try {
+      const currentDate = new Date();
+      const forms = await EcellForm.find({isPublished: true,$or:[{endDate: {$gt: currentDate }},{endDate:null}]}).select('_id title description');
+      res.status(200).json({ forms });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to fetch forms' });
+    }
+  };
+
+const getForm = async (req, res) => {
+    try {
+      const {formId}=req.body;
+      const form = await EcellForm.find({_id:formId});
+      res.status(200).json({ form });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to fetch form' });
+    }
+  };
+  
+
+module.exports = { checkStartupRegistration, registerStartup,getActiveForm,getForm};
