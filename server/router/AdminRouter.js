@@ -36,4 +36,6 @@ router.route('/publish-form/:formId').post(AdminEndPoint.togglePublish);
 router.route('/set-end-date/:formId').post(AdminEndPoint.updateEndDate);
 
 
+router.route('/add-notice').post(AdminEndPoint.addNotice);
+
 module.exports = router;

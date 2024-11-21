@@ -215,6 +215,14 @@ const getForms = async (req, res) => {
   }
 };
 
+const addNotice = async(req,res) =>{
+  try {
+    
+  } catch (error) {
+    
+  }
+}
+
 
 const getForm = async (req, res) => {
   try {
@@ -260,5 +268,7 @@ const togglePublish = async (req, res) => {
 
 
 
-module.exports={addEvent, addGalleryImg , addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,getForm,updateEndDate,togglePublish}
+module.exports={addEvent, addGalleryImg,addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,getForm,updateEndDate,togglePublish,addNotice}
+
+
 
