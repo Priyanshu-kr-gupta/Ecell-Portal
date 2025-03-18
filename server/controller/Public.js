@@ -2,6 +2,40 @@ const Event = require('../models/Event');
 const TeamMember= require('../models/Team')
 const GuestSpeaker = require('../models/GuestSpeaker');
 
+
+const getTopUpcomingEvents = async (req, res) => {
+  try {
+    const topUpcomingEvents = await Event.find({
+      expectedDate: { $gte: new Date() },
+    })
+      .sort({ expectedDate: 1 })
+      .limit(5);
+    return res.status(200).json({ topUpcomingEvents });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "Server error while fetching top upcoming events" });
+  }
+};
+
+const getTopPastEvents = async (req, res) => {
+  try {
+    const topPastEvents = await Event.find({
+      expectedDate: { $lt: new Date() },
+    })
+      .sort({ expectedDate: -1 })
+      .limit(5);
+    return res.status(200).json({ topPastEvents });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "Server error while fetching top past events" });
+  }
+};
+
+
 const getUpcomingEvents = async (req, res) => {
   try {
     const page = parseInt(req.body.currentPage) || 1;
@@ -139,4 +173,4 @@ const getTeamMember = async(req,res)=>{
     res.status(500).json({ error: 'Failed to fetch team members' });
   }
 }
-module.exports = { getUpcomingEvents, getPastEvents, getAllGuestSpeakers, getObjectCount ,getParticularEvent,getTeamMember};
+module.exports = { getUpcomingEvents, getPastEvents, getAllGuestSpeakers, getObjectCount ,getParticularEvent,getTeamMember,getTopPastEvents,getTopUpcomingEvents};

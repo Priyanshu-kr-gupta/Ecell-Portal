@@ -7,5 +7,7 @@ router.route('/check-startup').post(UserEndPoint.checkStartupRegistration)
 router.route('/register-startup').post(UserEndPoint.registerStartup)
 router.route('/get-active-forms').get(UserEndPoint.getActiveForm)
 router.route('/get-form').post(UserEndPoint.getForm);
+router.route('/submit-form').post(UserEndPoint.submitForm);
+
 
 module.exports = router;

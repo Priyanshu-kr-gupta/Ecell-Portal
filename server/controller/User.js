@@ -1,6 +1,6 @@
 const Startup = require("../models/Startup");
 const EcellForm = require('../models/EcellForm')
-
+const Response = require('../models/Response')
 const checkStartupRegistration = async (req, res) => {
     try {
         const {userId} = req.body;
@@ -63,5 +63,26 @@ const getForm = async (req, res) => {
     }
   };
   
+  const submitForm=async(req,res)=>{
+    try {
+      const {formId,responses,userId}=req.body;
+      //   if (!formId || !responses||!userId || !Array.isArray(responses)) {
+      //   return res.status(400).json({ error: 'Invalid form submission data.' });
+      // }  
+      const newResponse = new Response({
+        formId,
+        userId,
+        answers: responses,
+      });
+  
+      await newResponse.save();
+  
+      res.status(200).json({ message: 'Form submitted successfully!' });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      res.status(500).json({ error: 'Failed to submit form. Please try again.' });
+    }
+}
 
-module.exports = { checkStartupRegistration, registerStartup,getActiveForm,getForm};
+
+module.exports = { checkStartupRegistration, registerStartup,getActiveForm,getForm,submitForm};
