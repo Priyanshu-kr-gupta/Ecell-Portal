@@ -8,8 +8,7 @@ const getTopUpcomingEvents = async (req, res) => {
     const topUpcomingEvents = await Event.find({
       expectedDate: { $gte: new Date() },
     })
-      .sort({ expectedDate: 1 })
-      .limit(5);
+      .sort({ expectedDate: 1 });
     return res.status(200).json({ topUpcomingEvents });
   } catch (error) {
     console.error(error);
