@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState ,useEffect} from 'react';
-const AuthContext = createContext();
+export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userRole, setUserRole] = useState(localStorage.getItem('userRole') || '');

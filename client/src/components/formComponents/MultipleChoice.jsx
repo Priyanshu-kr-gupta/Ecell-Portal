@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function MultipleChoice({questionId,options,selectedOption,onChange}) {
+export default function MultipleChoice({questionId,options,selectedOption,onChange,setRequire}) {
   return (
     <div className="mt-2">
     {options.map((option, i) => (
@@ -11,6 +11,7 @@ export default function MultipleChoice({questionId,options,selectedOption,onChan
           value={option}
           checked={selectedOption === option}
           onChange={() => onChange(questionId, option)}
+          required={setRequire}
         />{' '}
         {option}
       </label>

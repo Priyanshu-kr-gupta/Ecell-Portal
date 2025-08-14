@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-export default function Checkboxes({questionId,options,onChange}) {
+export default function Checkboxes({questionId,options,onChange,setRequire}) {
     const [selectedOptions, setSelectedOptions] = useState([]);
 
     const handleOptionChange = (option, isChecked) => {
@@ -18,6 +18,7 @@ export default function Checkboxes({questionId,options,onChange}) {
           type="checkbox"
           checked={selectedOptions.includes(option)}
           onChange={(e) => handleOptionChange(option, e.target.checked)}
+          required={setRequire}
         />{" "}
         {option}
       </label>

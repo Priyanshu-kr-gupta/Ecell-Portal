@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ShortAnswer({questionId,value,onChange}) {
+export default function ShortAnswer({questionId,value,onChange,setRequire}) {
   return (
     <input
     type="text"
@@ -8,6 +8,7 @@ export default function ShortAnswer({questionId,value,onChange}) {
     placeholder="Short Answer"
     value={value || ''}
     onChange={(e) => onChange(questionId, e.target.value)}
+    required={setRequire}
   />
   )
 }

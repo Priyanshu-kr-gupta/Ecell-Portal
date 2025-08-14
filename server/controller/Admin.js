@@ -1,12 +1,13 @@
-
+const { Parser } = require('json2csv');
 const Event = require('../models/Event');
 const GuestSpeaker = require('../models/GuestSpeaker');
 const TeamMember= require('../models/Team')
+const Response = require('../models/Response');  
 const EcellForm = require('../models/EcellForm')
-
+const User = require('../models/User')
 const { uploadOnCloudinary, uploadMultipleImages } = require('../utils/cloudinary');
+const Startup = require('../models/Startup');
 
-// Controller to add a new event with banner and gallery images
 const addEvent = async (req, res) => {
     try {
         const { name, intro, description,expectedDate } = req.body;
@@ -223,6 +224,27 @@ const addNotice = async(req,res) =>{
   }
 }
 
+const getAllStartups = async (req, res) => {
+  try {
+      const startups = await Startup.find()
+          .populate({
+              path: 'user',
+              select: '-Role' 
+          });
+
+      res.status(200).json({
+          success: true,
+          data: startups
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({
+          success: false,
+          message: 'Server Error'
+      });
+  }
+};
+
 
 const getForm = async (req, res) => {
   try {
@@ -268,7 +290,79 @@ const togglePublish = async (req, res) => {
 
 
 
-module.exports={addEvent, addGalleryImg,addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,getForm,updateEndDate,togglePublish,addNotice}
+
+
+const getResponses = async (req, res) => {
+  const { formId, page = 1 } = req.body;
+  const perPage = 10; 
+
+  try {
+    const responses = await Response.find({ formId })
+      .skip((page - 1) * perPage)  
+      .limit(perPage)             
+      .populate('userId','Name Email Reg_No Contact_No')  
+      .exec();
+
+    const hasMore = responses.length === perPage;
+    res.json({
+      responses,
+      hasMore,
+    });
+  } catch (error) {
+    console.error('Error fetching responses:', error);
+    res.status(500).json({ error: 'Failed to fetch responses' });
+  }
+};
+
+
+const exportResponses = async (req, res) => {
+  const { formId } = req.params;
+  try {
+    const form = await EcellForm.findById(formId).lean();
+    if (!form) return res.status(404).send('Form not found');
+
+    const responses = await Response.find({ formId })
+      .populate('userId', 'Name Email Reg_No Contact_No')
+      .lean();
+
+    const questionColumns = form.questions.map((q) => q.text);
+    const rows = responses.map((r) => {
+      const row = {
+        Name: r.userId.Name,
+        Email: r.userId.Email,
+        Reg_No: r.userId.Reg_No,
+        Contact_No: r.userId.Contact_No,
+        SubmittedAt: r.submittedAt.toISOString(),
+      };
+
+      form.questions.forEach((q) => {
+        const answer = r.answers.find((a) => q._id.equals(a.questionId));
+        row[q.text] = answer ? answer.answer : '[No Answer]';
+      });
+
+      return row;
+    });
+
+    const fields = ['Name', 'Email', 'Reg_No', 'Contact_No', 'SubmittedAt', ...questionColumns];
+    const csv = new Parser({ fields }).parse(rows);
+
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="responses-${formId}.csv"`
+    );
+    res.send(csv);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error exporting responses');
+  }
+};
+
+
+
+module.exports={addEvent, addGalleryImg,addGuestSpeaker,addTeamMember,deleteDocument,createForm,getForms,getForm,
+                  updateEndDate,togglePublish,addNotice,getResponses,exportResponses,getAllStartups}
 
 
 

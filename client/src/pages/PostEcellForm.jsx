@@ -1,5 +1,7 @@
 import React, { useState,useEffect} from 'react';
 import { useParams } from "react-router-dom";
+import Responses from '../components/Response';
+
 export default function PostEcellForm() {
 
   const {formId}=useParams();
@@ -22,7 +24,7 @@ export default function PostEcellForm() {
         if (response.ok) {
           setFormDetails(data.form[0]);
           setIsPublished(data.form[0].isPublished);
-          setEndDate(data.form[0].endDate.slice(0,10) || '');
+          setEndDate(data.form[0].endDate); //(i have to do substring here to extract date)
         } else {
           console.error(data.error || 'Failed to fetch form details');
         }
@@ -176,12 +178,7 @@ export default function PostEcellForm() {
 )}
 
     {tab==='Responses' && 
-        <button
-        
-        className="px-4 py-2 text-white bg-indigo-500 rounded-lg hover:bg-indigo-600"
-        >
-          Export Responses
-        </button>
+       <Responses formId={formId}/>
         }
     </div>
   );

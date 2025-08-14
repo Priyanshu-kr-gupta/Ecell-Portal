@@ -79,28 +79,28 @@ export default function MyStartup() {
     isRegistered ? (
       <div className="h-screen overflow-y-scroll flex justify-center">
         <div className="p-10 rounded-lg w-full">
-          <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+          <h1 className="text-2xl font-semibold text-center text-white mb-6">
             Your Startup Details
           </h1>
           <div className="space-y-6">
             <div>
-              <h2 className="text-lg text-gray-700 font-medium">Startup Idea Title</h2>
-              <p className="text-gray-600">{startupData.title}</p>
+              <h2 className="text-lg text-white font-medium">Startup Idea Title</h2>
+              <p className="text-white">{startupData.title}</p>
             </div>
 
             <div>
-              <h2 className="text-lg text-gray-700 font-medium">Team Members</h2>
-              <p className="text-gray-600">{startupData.teamMembers}</p>
+              <h2 className="text-lg text-white font-medium">Team Members</h2>
+              <p className="text-white">{startupData.teamMembers}</p>
             </div>
 
             <div>
-              <h2 className="text-lg text-gray-700 font-medium">Idea Description</h2>
-              <p className="text-gray-600">{startupData.idea}</p>
+              <h2 className="text-lg text-white font-medium">Idea Description</h2>
+              <p className="text-white">{startupData.idea}</p>
             </div>
 
             <div>
-              <h2 className="text-lg text-gray-700 font-medium">Stage</h2>
-              <p className="text-gray-600">{startupData.stage}</p>
+              <h2 className="text-lg text-white font-medium">Stage</h2>
+              <p className="text-white">{startupData.stage}</p>
             </div>
 
             <div>
@@ -123,12 +123,12 @@ export default function MyStartup() {
     ) : (
       <div className="h-screen overflow-y-scroll flex justify-center">
         <div className="p-10 rounded-lg w-full">
-          <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+          <h1 className="text-2xl font-semibold text-center text-white mb-6">
             Register Your Startup
           </h1>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 text-white">
             <div>
-              <label htmlFor="title" className="block text-lg text-gray-700 font-medium mb-2">
+              <label htmlFor="title" className="block text-lg font-medium mb-2">
                 Startup Idea Title
               </label>
               <input
@@ -137,13 +137,13 @@ export default function MyStartup() {
                 id="title"
                 value={startupData.title}
                 onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-lg border border-[#3A4A5F] bg-[#2E3A4D] outline-none"
                 placeholder="Enter your startup's idea title"
                 required
               />
             </div>
             <div>
-              <label htmlFor="teamMembers" className="block text-lg text-gray-700 font-medium mb-2">
+              <label htmlFor="teamMembers" className="block text-lg font-medium mb-2">
                 Number of Team Members
               </label>
               <input
@@ -152,13 +152,13 @@ export default function MyStartup() {
                 id="teamMembers"
                 value={startupData.teamMembers}
                 onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-lg border border-[#3A4A5F] bg-[#2E3A4D] outline-none"
                 placeholder="Enter the number of members in your team"
                 required
               />
             </div>
             <div>
-              <label htmlFor="idea" className="block text-lg text-gray-700 font-medium mb-2">
+              <label htmlFor="idea" className="block text-lg font-medium mb-2">
                 Idea Description
               </label>
               <textarea
@@ -166,14 +166,14 @@ export default function MyStartup() {
                 id="idea"
                 value={startupData.idea}
                 onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-lg border border-[#3A4A5F] bg-[#2E3A4D] outline-none"
                 placeholder="Describe your startup idea"
                 rows="4"
                 required
               />
             </div>
             <div>
-              <label htmlFor="stage" className="block text-lg text-gray-700 font-medium mb-2">
+              <label htmlFor="stage" className="block text-lg font-medium mb-2">
                 Startup Stage
               </label>
               <select
@@ -181,7 +181,7 @@ export default function MyStartup() {
                 id="stage"
                 value={startupData.stage}
                 onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-lg border border-[#3A4A5F] bg-[#2E3A4D] outline-none"
                 required
               >
                 <option value="">Select Stage</option>
@@ -193,7 +193,7 @@ export default function MyStartup() {
               </select>
             </div>
             <div>
-              <label htmlFor="phase" className="block text-lg text-gray-700 font-medium mb-2">
+              <label htmlFor="phase" className="block text-lg font-medium mb-2">
                 Idea Phase
               </label>
               <select
@@ -201,7 +201,7 @@ export default function MyStartup() {
                 id="phase"
                 value={startupData.phase}
                 onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-lg border border-[#3A4A5F] bg-[#2E3A4D] outline-none"
                 required
               >
                 <option value="">Select Phase</option>
@@ -213,7 +213,7 @@ export default function MyStartup() {
               </select>
             </div>
             <div>
-              <label htmlFor="requirements" className="block text-lg text-gray-700 font-medium mb-2">
+              <label htmlFor="requirements" className="block text-lg  font-medium mb-2">
                 Requirements for the Startup
               </label>
               <textarea
@@ -221,7 +221,7 @@ export default function MyStartup() {
                 id="requirements"
                 value={startupData.requirements}
                 onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-lg border border-[#3A4A5F] bg-[#2E3A4D] outline-none"
                 placeholder="What are the requirements to bring your startup idea to life?"
                 rows="4"
                 required
@@ -237,7 +237,7 @@ export default function MyStartup() {
                 className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                 required
               />
-              <label htmlFor="consent" className="ml-2 text-lg text-gray-700">
+              <label htmlFor="consent" className="ml-2 text-lg">
                 I consent to share my startup idea.
               </label>
             </div>

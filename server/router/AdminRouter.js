@@ -37,5 +37,9 @@ router.route('/set-end-date/:formId').post(AdminEndPoint.updateEndDate);
 
 
 router.route('/add-notice').post(AdminEndPoint.addNotice);
+router.route('/get-startups').get(AdminEndPoint.getAllStartups);
+
+router.route('/get-responses').post(AdminEndPoint.getResponses);
+router.route('/export-responses/:formId').get(AdminEndPoint.exportResponses);
 
 module.exports = router;

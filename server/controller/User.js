@@ -69,6 +69,7 @@ const getForm = async (req, res) => {
       //   if (!formId || !responses||!userId || !Array.isArray(responses)) {
       //   return res.status(400).json({ error: 'Invalid form submission data.' });
       // }  
+      console.log(responses)
       const newResponse = new Response({
         formId,
         userId,

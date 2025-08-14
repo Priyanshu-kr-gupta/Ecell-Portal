@@ -21,10 +21,12 @@ import PostEcellForm from "./pages/PostEcellForm.jsx";
 import ActiveForms from "./pages/ActiveForms.jsx"
 import Header from "./components/Header.jsx";
 import FillForm from "./pages/FillForm.jsx";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <>
+    <AuthProvider>
+    
     <Routes>
       <Route path="/" element={<Intro />}></Route>
       <Route path="/login" element={<Login />}></Route>
@@ -67,7 +69,7 @@ function App() {
         <Route path="Setting" element={<Setting />} />
       </Route>
     </Routes>
-        </>
+        </AuthProvider>
   );
 }
 
